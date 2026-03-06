@@ -15,7 +15,7 @@ const Hero = () => {
           <span className="inline-block text-sm font-medium tracking-widest uppercase text-accent mb-4">
             Știința părului sănătos
           </span>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-foreground leading-tight mb-6">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-foreground leading-tight mb-6">
             Descoperă secretele <br />
             <span className="text-primary">părului tău</span>
           </h1>
