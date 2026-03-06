@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, ChevronLeft, CheckCircle2 } from "lucide-react";
+import RoutineResults from "./RoutineResults";
 
 interface Option {
   label: string;
@@ -103,6 +104,56 @@ const questions: Question[] = [
       },
     ],
   },
+  {
+    title: "Cât de des te speli pe cap?",
+    options: [
+      {
+        label: "Zilnic",
+        description:
+          "Te speli pe cap în fiecare zi. Spălatul frecvent poate elimina uleiurile naturale ale scalpului, ducând la uscăciune sau la producție excesivă de sebum compensator.",
+      },
+      {
+        label: "La 2-3 zile",
+        description:
+          "Te speli pe cap o dată la două-trei zile. Aceasta este frecvența recomandată pentru majoritatea tipurilor de păr, permițând scalpului să mențină un echilibru natural.",
+      },
+      {
+        label: "O dată pe săptămână",
+        description:
+          "Te speli pe cap o dată pe săptămână. Recomandat pentru părul creț, foarte creț sau uscat, ajutând la păstrarea uleiurilor naturale și a hidratării.",
+      },
+      {
+        label: "Mai rar de o dată pe săptămână",
+        description:
+          "Te speli pe cap mai rar de o dată pe săptămână. Poate fi benefic pentru părul foarte uscat, dar necesită atenție la igiena scalpului.",
+      },
+    ],
+  },
+  {
+    title: "La ce fel de apă ai acces?",
+    options: [
+      {
+        label: "Apă moale",
+        description:
+          "Concentrație scăzută de carbonat de calciu (sub 60 mg/l). Spumează ușor și nu lasă reziduuri pe păr. Ideală pentru îngrijirea părului.",
+      },
+      {
+        label: "Apă moderat dură",
+        description:
+          "Concentrație medie de carbonat de calciu (60–120 mg/l). Poate lăsa ușoare depuneri minerale pe păr în timp, dar efectele sunt moderate.",
+      },
+      {
+        label: "Apă dură",
+        description:
+          "Concentrație ridicată de carbonat de calciu (120–180 mg/l). Poate face părul aspru, uscat și dificil de gestionat din cauza depunerilor minerale.",
+      },
+      {
+        label: "Apă foarte dură",
+        description:
+          "Concentrație foarte ridicată de carbonat de calciu (peste 180 mg/l). Afectează semnificativ textura și sănătatea părului, necesitând tratamente de chelare.",
+      },
+    ],
+  },
 ];
 
 const Questionnaire = () => {
@@ -136,7 +187,7 @@ const Questionnaire = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="max-w-2xl mx-auto text-center bg-card rounded-2xl p-12 shadow-lg border border-border"
+            className="max-w-2xl mx-auto text-center bg-card rounded-2xl p-12 shadow-lg border border-border mb-16"
           >
             <CheckCircle2 className="mx-auto mb-6 text-primary" size={64} />
             <h2 className="text-3xl font-display font-bold text-foreground mb-4">
@@ -167,6 +218,8 @@ const Questionnaire = () => {
               Reia chestionarul
             </button>
           </motion.div>
+
+          <RoutineResults answers={answers} questions={questions} />
         </div>
       </section>
     );
@@ -180,7 +233,7 @@ const Questionnaire = () => {
             Chestionarul Hair Theory
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Răspunde la 4 întrebări simple pentru a descoperi profilul unic al părului tău.
+            Răspunde la {questions.length} întrebări simple pentru a descoperi profilul unic al părului tău.
           </p>
         </div>
 
