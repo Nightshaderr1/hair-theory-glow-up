@@ -12,13 +12,13 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="flex-1 text-center md:text-left"
         >
-          <span className="inline-block text-sm font-medium tracking-widest uppercase text-accent mb-4">
-            Știința părului sănătos
-          </span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-foreground leading-tight mb-6">
+          <h1 className="text-7xl md:text-8xl lg:text-9xl font-display font-bold text-primary leading-none mb-4">
+            Hair Theory
+          </h1>
+          <p className="text-2xl md:text-3xl lg:text-4xl font-display font-semibold text-foreground leading-tight mb-6">
             Descoperă secretele <br />
             <span className="text-primary">părului tău</span>
-          </h1>
+          </p>
           <p className="text-lg text-muted-foreground max-w-lg mb-8 leading-relaxed">
             Hair Theory te ajută să înțelegi nevoile unice ale scalpului și părului tău.
             Completează chestionarul nostru și primește recomandări personalizate.
