@@ -39,7 +39,7 @@ const Hero = () => {
           <img
 
             alt="Ilustrație botanică Hair Theory"
-            className="w-80 md:w-[28rem] lg:w-[32rem] drop-shadow-xl border-none border-warm-foreground shadow-lg" src="/lovable-uploads/55657a40-5ecd-4b3f-9be3-8172e9d9208a.png" />
+            className="w-80 md:w-[28rem] lg:w-[32rem] mix-blend-multiply" src="/lovable-uploads/55657a40-5ecd-4b3f-9be3-8172e9d9208a.png" />
           
         </motion.div>
       </div>
