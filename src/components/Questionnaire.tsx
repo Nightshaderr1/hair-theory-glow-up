@@ -154,6 +154,76 @@ const questions: Question[] = [
       },
     ],
   },
+  {
+    title: "Cât de des vă tundeți?",
+    options: [
+      {
+        label: "Mai puțin de o dată pe an",
+        description:
+          "Tundeți părul foarte rar. Vârfurile pot deveni deteriorate și despicate, afectând aspectul general și sănătatea firului de păr.",
+      },
+      {
+        label: "O dată pe an",
+        description:
+          "Tundeți părul aproximativ o dată pe an. Această frecvență poate duce la acumularea de vârfuri despicate și la un aspect neîngrijit.",
+      },
+      {
+        label: "La fiecare 6 luni",
+        description:
+          "Tundeți părul de două ori pe an. O frecvență rezonabilă pentru menținerea sănătății părului, dar vârfurile pot avea nevoie de atenție între tunderi.",
+      },
+      {
+        label: "La fiecare 2 luni",
+        description:
+          "Tundeți părul la fiecare două luni. Frecvență ideală pentru majoritatea tipurilor de păr, menținând vârfurile sănătoase și forma coafurii.",
+      },
+      {
+        label: "Lunar",
+        description:
+          "Tundeți părul în fiecare lună. Excelent pentru menținerea unei forme precise și eliminarea vârfurilor despicate înainte de a se extinde.",
+      },
+    ],
+  },
+  {
+    title: "Suferiți de alopecie? Dacă da, ce tip de alopecie?",
+    options: [
+      {
+        label: "Nu sufăr de alopecie",
+        description:
+          "Nu aveți probleme de cădere a părului sau de rărire vizibilă. Părul crește normal și nu prezintă semne de alopecie.",
+      },
+      {
+        label: "Alopecia Androgenetică (Calviția Ereditară)",
+        description:
+          "Cea mai comună formă, cauzată de factori genetici și hormonali. Se manifestă prin retragerea liniei părului (bărbați) sau rărirea creștetului (femei).",
+      },
+      {
+        label: "Alopecia Areata (în Pete)",
+        description:
+          "Afecțiune autoimună care provoacă căderea părului în zone rotunde, delimitate. Include variante: Totalis (întregul scalp), Universalis (întregul corp), Ophiasis (fâșie pe conturul scalpului).",
+      },
+      {
+        label: "Efluviul Telogen (Alopecie Difuză)",
+        description:
+          "Cădere masivă, temporară, cauzată de stres, naștere, boli sau deficiențe nutriționale. De regulă reversibilă odată cu eliminarea cauzei.",
+      },
+      {
+        label: "Alopecia de Tracțiune / Cicatricială",
+        description:
+          "De Tracțiune: provocată de coafuri foarte strânse (cozi, extensii) care tensionează foliculii. Cicatricială: distruge foliculul și îl înlocuiește cu țesut cicatricial (ex: lichen planopilar).",
+      },
+      {
+        label: "Tinea Capitis (Infecție Fungică)",
+        description:
+          "Infecție fungică a scalpului, frecventă la copii. Se manifestă prin zone de cădere a părului, mâncărime și descuamare.",
+      },
+      {
+        label: "Alopecia indusă de tratamente",
+        description:
+          "Pierderea părului din cauza chimioterapiei sau radioterapiei. De regulă reversibilă după terminarea tratamentului.",
+      },
+    ],
+  },
 ];
 
 const Questionnaire = () => {
