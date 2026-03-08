@@ -1,33 +1,19 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
+import { ReviewsDecorations } from "./BotanicalDecorations";
 
 const reviews = [
-  {
-    name: "Maria D.",
-    text: "Am descoperit că am porozitate ridicată și am schimbat complet rutina. Diferența este enormă!",
-    rating: 5,
-  },
-  {
-    name: "Andreea P.",
-    text: "Chestionarul m-a ajutat să înțeleg de ce produsele pe care le foloseam nu funcționau. Foarte util!",
-    rating: 5,
-  },
-  {
-    name: "Ioana M.",
-    text: "Articolele de pe blog sunt bine documentate și ușor de înțeles. Recomand tuturor!",
-    rating: 4,
-  },
-  {
-    name: "Elena S.",
-    text: "În sfârșit un loc unde găsesc informații bazate pe știință, nu pe tendințe trecătoare.",
-    rating: 5,
-  },
+  { name: "Maria D.", text: "Am descoperit că am porozitate ridicată și am schimbat complet rutina. Diferența este enormă!", rating: 5 },
+  { name: "Andreea P.", text: "Chestionarul m-a ajutat să înțeleg de ce produsele pe care le foloseam nu funcționau. Foarte util!", rating: 5 },
+  { name: "Ioana M.", text: "Articolele de pe blog sunt bine documentate și ușor de înțeles. Recomand tuturor!", rating: 4 },
+  { name: "Elena S.", text: "În sfârșit un loc unde găsesc informații bazate pe știință, nu pe tendințe trecătoare.", rating: 5 },
 ];
 
 const Reviews = () => {
   return (
-    <section id="reviews" className="py-24 bg-rose/30">
-      <div className="container mx-auto px-4">
+    <section id="reviews" className="relative py-24 bg-rose/30 overflow-hidden">
+      <ReviewsDecorations />
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <span className="inline-block text-sm font-medium tracking-widest uppercase text-accent mb-3">
             Comunitate
@@ -44,7 +30,8 @@ const Reviews = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-card rounded-2xl p-8 border border-border shadow-sm"
+              whileHover={{ y: -4, boxShadow: "0 8px 24px -6px hsl(350 40% 88% / 0.5)" }}
+              className="bg-card rounded-2xl p-8 border border-border shadow-sm transition-colors"
             >
               <Quote className="text-primary/30 mb-4" size={32} />
               <p className="text-foreground leading-relaxed mb-4 italic">"{r.text}"</p>
@@ -52,11 +39,12 @@ const Reviews = () => {
                 <span className="font-semibold text-foreground">{r.name}</span>
                 <div className="flex gap-0.5">
                   {Array.from({ length: 5 }).map((_, si) => (
-                    <Star
-                      key={si}
-                      size={16}
-                      className={si < r.rating ? "fill-accent text-accent" : "text-sand"}
-                    />
+                    <motion.div key={si} initial={{ scale: 0 }} whileInView={{ scale: 1 }} transition={{ delay: 0.3 + si * 0.08 }} viewport={{ once: true }}>
+                      <Star
+                        size={16}
+                        className={si < r.rating ? "fill-accent text-accent" : "text-sand"}
+                      />
+                    </motion.div>
                   ))}
                 </div>
               </div>

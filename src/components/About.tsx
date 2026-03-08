@@ -1,28 +1,18 @@
 import { motion } from "framer-motion";
 import { Leaf, Heart, Sparkles } from "lucide-react";
+import { AboutDecorations } from "./BotanicalDecorations";
 
 const values = [
-  {
-    icon: Leaf,
-    title: "Bazat pe știință",
-    description: "Toate recomandările noastre sunt susținute de cercetări dermatologice și tricologice.",
-  },
-  {
-    icon: Heart,
-    title: "Personalizat",
-    description: "Fiecare tip de păr este unic. Oferim sfaturi adaptate nevoilor tale specifice.",
-  },
-  {
-    icon: Sparkles,
-    title: "Accesibil",
-    description: "Informații clare, fără jargon, pentru ca toată lumea să poată avea grijă de părul său.",
-  },
+  { icon: Leaf, title: "Bazat pe știință", description: "Toate recomandările noastre sunt susținute de cercetări dermatologice și tricologice." },
+  { icon: Heart, title: "Personalizat", description: "Fiecare tip de păr este unic. Oferim sfaturi adaptate nevoilor tale specifice." },
+  { icon: Sparkles, title: "Accesibil", description: "Informații clare, fără jargon, pentru ca toată lumea să poată avea grijă de părul său." },
 ];
 
 const About = () => {
   return (
-    <section id="about" className="py-24">
-      <div className="container mx-auto px-4">
+    <section id="about" className="relative py-24 overflow-hidden">
+      <AboutDecorations />
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <span className="inline-block text-sm font-medium tracking-widest uppercase text-accent mb-3">
             Despre noi
@@ -45,11 +35,15 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="text-center p-8 rounded-2xl bg-card border border-border"
+              whileHover={{ y: -6, scale: 1.03 }}
+              className="text-center p-8 rounded-2xl bg-card border border-border transition-shadow hover:shadow-lg"
             >
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 text-primary mb-5">
+              <motion.div
+                whileHover={{ rotate: 12, scale: 1.1 }}
+                className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 text-primary mb-5"
+              >
                 <v.icon size={28} />
-              </div>
+              </motion.div>
               <h3 className="font-display font-semibold text-lg text-foreground mb-3">
                 {v.title}
               </h3>
