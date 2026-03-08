@@ -69,7 +69,7 @@ const floatVariants = {
     transition: {
       duration: 4 + i * 0.5,
       repeat: Infinity,
-      ease: "easeInOut",
+      ease: "easeInOut" as const,
     },
   }),
 };
@@ -81,7 +81,7 @@ const driftVariants = {
     transition: {
       duration: 5 + i * 0.7,
       repeat: Infinity,
-      ease: "easeInOut",
+      ease: "easeInOut" as const,
     },
   }),
 };
