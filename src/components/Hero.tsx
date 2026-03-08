@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
-import heroImg from "@/assets/hero-botanical.png";
+import { HeroDecorations } from "./BotanicalDecorations";
 
 const Hero = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-sage/30 via-background to-rose/20" />
+      <HeroDecorations />
       <div className="container mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center gap-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -23,12 +24,14 @@ const Hero = () => {
             Hair Theory te ajută să înțelegi nevoile unice ale scalpului și părului tău.
             Completează chestionarul nostru și primește recomandări personalizate.
           </p>
-          <a
+          <motion.a
             href="#questionnaire"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-medium text-lg hover:opacity-90 transition-opacity shadow-lg">
+            whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px hsl(152 28% 38% / 0.4)" }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-medium text-lg transition-opacity shadow-lg">
             
             Începe chestionarul
-          </a>
+          </motion.a>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -36,15 +39,17 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.3 }}
           className="flex-1 flex justify-center">
           
-          <img
-
+          <motion.img
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             alt="Ilustrație botanică Hair Theory"
-            className="w-96 md:w-[34rem] lg:w-[40rem] mix-blend-multiply" src="/lovable-uploads/55657a40-5ecd-4b3f-9be3-8172e9d9208a.png" />
-          
+            className="w-96 md:w-[34rem] lg:w-[40rem] mix-blend-multiply"
+            src="/lovable-uploads/55657a40-5ecd-4b3f-9be3-8172e9d9208a.png"
+          />
         </motion.div>
       </div>
-    </section>);
-
+    </section>
+  );
 };
 
 export default Hero;
