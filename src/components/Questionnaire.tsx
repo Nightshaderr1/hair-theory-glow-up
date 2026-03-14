@@ -3,107 +3,51 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, ChevronLeft, CheckCircle2 } from "lucide-react";
 import RoutineResults from "./RoutineResults";
 import { QuestionnaireDecorations } from "./BotanicalDecorations";
-
-interface Option {
-  label: string;
-  description: string;
-}
-
-interface Question {
-  title: string;
-  options: Option[];
-}
-
-const questions: Question[] = [
-  {
-    title: "Ce tip de scalp aveți?",
-    options: [
-      { label: "Scalp uscat", description: "Simți des senzație de strângere, mâncărime sau observi fulgi mici? Scalpul tău produce puțin sebum, ceea ce duce la uscăciune." },
-      { label: "Scalp cu tendință de îngrășare", description: "Părul tău devine gras la rădăcini la scurt timp după spălare? Scalpul produce sebum în exces, dând un aspect lucios și lipicios." },
-      { label: "Scalp mixt", description: "Ai zone grase la rădăcini dar vârfuri uscate? Scalpul mixt combină caracteristici ale celor două tipuri." },
-      { label: "Scalp vopsit/tratat chimic", description: "Ai folosit recent vopsea, decolorant sau tratamente chimice? Aceste proceduri pot sensibiliza scalpul și modifica structura părului." },
-    ],
-  },
-  {
-    title: "Ce tip de păr ai?",
-    options: [
-      { label: "Drept", description: "Firul de păr crește fără curburi vizibile, de la rădăcină până la vârf. Tinde să fie mai lucios, dar poate părea lipsit de volum." },
-      { label: "Ondulat", description: "Părul formează valuri lejere în formă de S. Are volum natural, dar poate deveni creț sau drept în funcție de umiditate." },
-      { label: "Creț", description: "Buclele sunt bine definite, de la spirale largi la inele strânse. Are nevoie de mai multă hidratare și de produse anti-frizz." },
-      { label: "Foarte creț", description: "Buclele sunt foarte strânse, în formă de Z sau spirală compactă. Este cel mai fragil tip de păr și necesită îngrijire delicată." },
-    ],
-  },
-  {
-    title: "Ce textură a părului aveți?",
-    options: [
-      { label: "Fin", description: "Firul de păr are un diametru mic. Se simte moale la atingere, dar se poate lipici ușor și îi lipsește volumul." },
-      { label: "Mediu", description: "Firul are un diametru standard. Este ușor de stilizat, rezistent și oferă un echilibru bun între volum și manevrabilitate." },
-      { label: "Gros", description: "Firul de păr are un diametru mare. Este puternic și rezistent, dar poate fi mai greu de gestionat și predispus la frizz." },
-    ],
-  },
-  {
-    title: "Ce porozitate a părului aveți?",
-    options: [
-      { label: "Scăzută", description: "Cuticulele sunt strâns închise – apa și produsele stau pe suprafața firului fără a fi absorbite rapid. Părul se usucă greu." },
-      { label: "Medie", description: "Cuticulele sunt ușor deschise – părul absoarbe și reține umiditatea în mod echilibrat. Este cel mai ușor de îngrijit." },
-      { label: "Ridicată", description: "Cuticulele sunt foarte deschise – părul absoarbe rapid umiditatea dar o pierde la fel de repede. Are nevoie de tratamente sigilante." },
-    ],
-  },
-  {
-    title: "Cât de des te speli pe cap?",
-    options: [
-      { label: "Zilnic", description: "Te speli pe cap în fiecare zi. Spălatul frecvent poate elimina uleiurile naturale ale scalpului, ducând la uscăciune sau la producție excesivă de sebum compensator." },
-      { label: "La 2-3 zile", description: "Te speli pe cap o dată la două-trei zile. Aceasta este frecvența recomandată pentru majoritatea tipurilor de păr, permițând scalpului să mențină un echilibru natural." },
-      { label: "O dată pe săptămână", description: "Te speli pe cap o dată pe săptămână. Recomandat pentru părul creț, foarte creț sau uscat, ajutând la păstrarea uleiurilor naturale și a hidratării." },
-      { label: "Mai rar de o dată pe săptămână", description: "Te speli pe cap mai rar de o dată pe săptămână. Poate fi benefic pentru părul foarte uscat, dar necesită atenție la igiena scalpului." },
-    ],
-  },
-  {
-    title: "La ce fel de apă ai acces?",
-    options: [
-      { label: "Apă moale", description: "Concentrație scăzută de carbonat de calciu (sub 60 mg/l). Spumează ușor și nu lasă reziduuri pe păr. Ideală pentru îngrijirea părului." },
-      { label: "Apă moderat dură", description: "Concentrație medie de carbonat de calciu (60–120 mg/l). Poate lăsa ușoare depuneri minerale pe păr în timp, dar efectele sunt moderate." },
-      { label: "Apă dură", description: "Concentrație ridicată de carbonat de calciu (120–180 mg/l). Poate face părul aspru, uscat și dificil de gestionat din cauza depunerilor minerale." },
-      { label: "Apă foarte dură", description: "Concentrație foarte ridicată de carbonat de calciu (peste 180 mg/l). Afectează semnificativ textura și sănătatea părului, necesitând tratamente de chelare." },
-    ],
-  },
-  {
-    title: "Cât de des vă tundeți?",
-    options: [
-      { label: "Mai puțin de o dată pe an", description: "Tundeți părul foarte rar. Vârfurile pot deveni deteriorate și despicate, afectând aspectul general și sănătatea firului de păr." },
-      { label: "O dată pe an", description: "Tundeți părul aproximativ o dată pe an. Această frecvență poate duce la acumularea de vârfuri despicate și la un aspect neîngrijit." },
-      { label: "La fiecare 6 luni", description: "Tundeți părul de două ori pe an. O frecvență rezonabilă pentru menținerea sănătății părului, dar vârfurile pot avea nevoie de atenție între tunderi." },
-      { label: "La fiecare 2 luni", description: "Tundeți părul la fiecare două luni. Frecvență ideală pentru majoritatea tipurilor de păr, menținând vârfurile sănătoase și forma coafurii." },
-      { label: "Lunar", description: "Tundeți părul în fiecare lună. Excelent pentru menținerea unei forme precise și eliminarea vârfurilor despicate înainte de a se extinde." },
-    ],
-  },
-  {
-    title: "Suferiți de alopecie? Dacă da, ce tip de alopecie?",
-    options: [
-      { label: "Nu sufăr de alopecie", description: "Nu aveți probleme de cădere a părului sau de rărire vizibilă. Părul crește normal și nu prezintă semne de alopecie." },
-      { label: "Alopecia Androgenetică (Calviția Ereditară)", description: "Cea mai comună formă, cauzată de factori genetici și hormonali. Se manifestă prin retragerea liniei părului (bărbați) sau rărirea creștetului (femei)." },
-      { label: "Alopecia Areata (în Pete)", description: "Afecțiune autoimună care provoacă căderea părului în zone rotunde, delimitate. Include variante: Totalis (întregul scalp), Universalis (întregul corp), Ophiasis (fâșie pe conturul scalpului)." },
-      { label: "Efluviul Telogen (Alopecie Difuză)", description: "Cădere masivă, temporară, cauzată de stres, naștere, boli sau deficiențe nutriționale. De regulă reversibilă odată cu eliminarea cauzei." },
-      { label: "Alopecia de Tracțiune / Cicatricială", description: "De Tracțiune: provocată de coafuri foarte strânse (cozi, extensii) care tensionează foliculii. Cicatricială: distruge foliculul și îl înlocuiește cu țesut cicatricial (ex: lichen planopilar)." },
-      { label: "Tinea Capitis (Infecție Fungică)", description: "Infecție fungică a scalpului, frecventă la copii. Se manifestă prin zone de cădere a părului, mâncărime și descuamare." },
-      { label: "Alopecia indusă de tratamente", description: "Pierderea părului din cauza chimioterapiei sau radioterapiei. De regulă reversibilă după terminarea tratamentului." },
-    ],
-  },
-];
+import { questions } from "./questionnaire/questions-data";
+import { QuestionnaireAnswer } from "./questionnaire/types";
+import ExpandableScalpQuestion from "./questionnaire/ExpandableScalpQuestion";
+import TwoStepHairType from "./questionnaire/TwoStepHairType";
+import PorosityQuestion from "./questionnaire/PorosityQuestion";
 
 const Questionnaire = () => {
   const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState<(number | null)[]>(
-    Array(questions.length).fill(null)
+  const [answers, setAnswers] = useState<QuestionnaireAnswer[]>(
+    questions.map(() => ({ optionIndex: null, subOptionIndex: null, expandableSubIndex: null }))
   );
   const [submitted, setSubmitted] = useState(false);
 
   const currentQ = questions[step];
 
-  const select = (optIndex: number) => {
+  const updateAnswer = (optIndex: number, subIndex?: number) => {
     const next = [...answers];
-    next[step] = optIndex;
+    const currentType = currentQ.type;
+
+    if (currentType === "expandable" && optIndex === currentQ.options.length) {
+      // Expandable option selected
+      if (next[step].optionIndex === optIndex && subIndex === undefined) {
+        // Deselect/collapse
+        next[step] = { optionIndex: null, expandableSubIndex: null };
+      } else {
+        next[step] = { optionIndex: optIndex, expandableSubIndex: subIndex ?? null };
+      }
+    } else if (currentType === "two-step") {
+      next[step] = { optionIndex: optIndex, subOptionIndex: subIndex ?? null };
+    } else {
+      next[step] = { optionIndex: optIndex };
+    }
     setAnswers(next);
+  };
+
+  const isCurrentAnswered = () => {
+    const a = answers[step];
+    if (a.optionIndex === null) return false;
+    if (currentQ.type === "expandable" && a.optionIndex === currentQ.options.length) {
+      return a.expandableSubIndex !== null;
+    }
+    if (currentQ.type === "two-step") {
+      return a.subOptionIndex !== null;
+    }
+    return true;
   };
 
   const goNext = () => {
@@ -114,6 +58,33 @@ const Questionnaire = () => {
   const goPrev = () => {
     if (step > 0) setStep(step - 1);
   };
+
+  const getAnswerLabel = (qIndex: number): string => {
+    const a = answers[qIndex];
+    const q = questions[qIndex];
+    if (a.optionIndex === null) return "—";
+
+    if (q.type === "expandable" && a.optionIndex === q.options.length && q.expandableOption) {
+      const subLabel = a.expandableSubIndex !== null
+        ? q.expandableOption.subOptions[a.expandableSubIndex].label
+        : "";
+      return `${q.expandableOption.label}${subLabel ? ` — ${subLabel}` : ""}`;
+    }
+
+    if (q.type === "two-step" && q.subCategories && a.subOptionIndex !== null) {
+      const sub = q.subCategories[a.optionIndex]?.[a.subOptionIndex];
+      return `${q.options[a.optionIndex].label} — ${sub?.code} ${sub?.label}`;
+    }
+
+    return q.options[a.optionIndex]?.label ?? "—";
+  };
+
+  // Convert to legacy format for RoutineResults
+  const legacyAnswers = answers.map(a => a.optionIndex);
+  const legacyQuestions = questions.map(q => ({
+    title: q.title,
+    options: q.options.map(o => ({ label: o.label, description: o.description })),
+  }));
 
   if (submitted) {
     return (
@@ -138,7 +109,7 @@ const Questionnaire = () => {
                 <div key={i}>
                   <span className="text-sm font-medium text-foreground">{q.title}</span>
                   <span className="ml-2 text-sm text-primary font-semibold">
-                    {answers[i] !== null ? q.options[answers[i]!].label : "—"}
+                    {getAnswerLabel(i)}
                   </span>
                 </div>
               ))}
@@ -149,7 +120,7 @@ const Questionnaire = () => {
               onClick={() => {
                 setSubmitted(false);
                 setStep(0);
-                setAnswers(Array(questions.length).fill(null));
+                setAnswers(questions.map(() => ({ optionIndex: null, subOptionIndex: null, expandableSubIndex: null })));
               }}
               className="mt-8 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
             >
@@ -157,11 +128,69 @@ const Questionnaire = () => {
             </motion.button>
           </motion.div>
 
-          <RoutineResults answers={answers} questions={questions} />
+          <RoutineResults answers={legacyAnswers} questions={legacyQuestions} />
         </div>
       </section>
     );
   }
+
+  const renderQuestion = () => {
+    if (currentQ.type === "expandable") {
+      return (
+        <ExpandableScalpQuestion
+          question={currentQ}
+          answer={answers[step]}
+          onSelect={updateAnswer}
+        />
+      );
+    }
+
+    if (currentQ.type === "two-step") {
+      return (
+        <TwoStepHairType
+          question={currentQ}
+          answer={answers[step]}
+          onSelect={updateAnswer}
+        />
+      );
+    }
+
+    if (currentQ.type === "with-test") {
+      return (
+        <PorosityQuestion
+          question={currentQ}
+          answer={answers[step]}
+          onSelect={(idx) => updateAnswer(idx)}
+        />
+      );
+    }
+
+    // Default question renderer
+    return (
+      <div className="grid gap-4">
+        {currentQ.options.map((opt, i) => {
+          const selected = answers[step].optionIndex === i;
+          return (
+            <motion.button
+              key={i}
+              onClick={() => updateAnswer(i)}
+              whileHover={{ scale: 1.02, x: 4 }}
+              whileTap={{ scale: 0.98 }}
+              animate={selected ? { scale: 1.02 } : { scale: 1 }}
+              className={`text-left p-5 rounded-xl border-2 transition-all ${
+                selected
+                  ? "border-primary bg-primary/10 shadow-md"
+                  : "border-border bg-card hover:border-primary/40 hover:shadow-sm"
+              }`}
+            >
+              <span className="font-semibold text-foreground">{opt.label}</span>
+              <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{opt.description}</p>
+            </motion.button>
+          );
+        })}
+      </div>
+    );
+  };
 
   return (
     <section id="questionnaire" className="relative py-24 bg-sage/20 overflow-hidden">
@@ -206,30 +235,7 @@ const Questionnaire = () => {
               <h3 className="text-2xl font-display font-semibold text-foreground mb-6">
                 {currentQ.title}
               </h3>
-              <div className="grid gap-4">
-                {currentQ.options.map((opt, i) => {
-                  const selected = answers[step] === i;
-                  return (
-                    <motion.button
-                      key={i}
-                      onClick={() => select(i)}
-                      whileHover={{ scale: 1.02, x: 4 }}
-                      whileTap={{ scale: 0.98 }}
-                      animate={selected ? { scale: 1.02 } : { scale: 1 }}
-                      className={`text-left p-5 rounded-xl border-2 transition-all ${
-                        selected
-                          ? "border-primary bg-primary/10 shadow-md"
-                          : "border-border bg-card hover:border-primary/40 hover:shadow-sm"
-                      }`}
-                    >
-                      <span className="font-semibold text-foreground">{opt.label}</span>
-                      <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
-                        {opt.description}
-                      </p>
-                    </motion.button>
-                  );
-                })}
-              </div>
+              {renderQuestion()}
             </motion.div>
           </AnimatePresence>
 
@@ -247,7 +253,7 @@ const Questionnaire = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={goNext}
-              disabled={answers[step] === null}
+              disabled={!isCurrentAnswered()}
               className="flex items-center gap-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 disabled:opacity-40 transition-opacity"
             >
               {step === questions.length - 1 ? "Finalizează" : "Următoarea"}
