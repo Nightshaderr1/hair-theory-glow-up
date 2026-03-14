@@ -155,6 +155,26 @@ export const questions: Question[] = [
     ],
   },
   {
+    title: "Cât de lung este părul tău?",
+    options: [
+      { label: "Foarte scurt (sub 5 cm)", description: "Părul abia acoperă scalpul. Stilizarea este limitată, dar îngrijirea scalpului devine prioritară." },
+      { label: "Scurt (5–15 cm)", description: "Părul ajunge până la urechi sau puțin sub. Ușor de întreținut, dar necesită tunderi regulate pentru a menține forma." },
+      { label: "Mediu (15–30 cm)", description: "Părul ajunge până la umeri. Oferă versatilitate în stilizare, dar necesită mai multă atenție la hidratare și protecție." },
+      { label: "Lung (30–50 cm)", description: "Părul depășește umerii. Vârfurile sunt mai predispuse la deteriorare și necesită îngrijire intensivă." },
+      { label: "Foarte lung (peste 50 cm)", description: "Părul ajunge sub mijlocul spatelui. Necesită rutine dedicate de îngrijire, cu accent pe nutriție și prevenirea ruperii." },
+    ],
+  },
+  {
+    title: "Cum îți porți părul cel mai des?",
+    options: [
+      { label: "Liber / Desfăcut", description: "Părul este lăsat să cadă natural, fără accesorii sau coafuri strânse. Permite aerisirea scalpului, dar poate fi expus la factori externi." },
+      { label: "Legat strâns (coadă, coc)", description: "Părul este prins strâns în coadă de cal, coc sau alte coafuri fixe. Tensiunea constantă poate afecta linia părului și foliculii." },
+      { label: "Legat lejer (coadă moale, împletituri)", description: "Părul este prins ușor, fără tensiune excesivă. O variantă mai blândă care protejează firul de păr." },
+      { label: "Cu accesorii (căciulă, șapcă, batic)", description: "Părul este acoperit frecvent. Fricțiunea cu materialele textile poate cauza frizz, electricitate statică sau ruperea firului." },
+      { label: "Stilizat cu căldură (placă, ondulator)", description: "Folosești regulat instrumente termice pentru stilizare. Căldura repetată poate deteriora cuticulele și deshidrata firul de păr." },
+    ],
+  },
+  {
     title: "Suferiți de alopecie?",
     type: "expandable",
     options: [
