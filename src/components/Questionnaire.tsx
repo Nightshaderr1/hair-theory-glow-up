@@ -135,6 +135,48 @@ const Questionnaire = () => {
   }
 
   const renderQuestion = () => {
+    if (currentQ.type === "info-card") {
+      return (
+        <div className="space-y-6">
+          <div className="grid gap-4 sm:grid-cols-2">
+            {currentQ.options.map((opt, i) => {
+              const selected = answers[step].optionIndex === i;
+              return (
+                <motion.button
+                  key={i}
+                  onClick={() => updateAnswer(i)}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  animate={selected ? { scale: 1.03 } : { scale: 1 }}
+                  className={`text-left p-6 rounded-xl border-2 transition-all ${
+                    selected
+                      ? "border-primary bg-primary/10 shadow-md"
+                      : "border-border bg-card hover:border-primary/40 hover:shadow-sm"
+                  }`}
+                >
+                  <span className="text-lg font-semibold text-foreground">{opt.label}</span>
+                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{opt.description}</p>
+                </motion.button>
+              );
+            })}
+          </div>
+          {currentQ.infoText && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-muted/60 rounded-xl p-5 border border-border"
+            >
+              <div className="flex items-start gap-3">
+                <span className="text-primary mt-0.5 text-xl shrink-0">❤️</span>
+                <p className="text-sm text-muted-foreground leading-relaxed">{currentQ.infoText}</p>
+              </div>
+            </motion.div>
+          )}
+        </div>
+      );
+    }
+
     if (currentQ.type === "expandable") {
       return (
         <ExpandableScalpQuestion
