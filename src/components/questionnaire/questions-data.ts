@@ -2,6 +2,40 @@ import { Question } from "./types";
 
 export const questions: Question[] = [
   {
+    title: "Cu ce sex ai fost identificat(ă) la naștere?",
+    type: "info-card",
+    options: [
+      { label: "Femeie", description: "Sexul biologic feminin, asociat cu un profil hormonal dominat de estrogen." },
+      { label: "Bărbat", description: "Sexul biologic masculin, asociat cu un profil hormonal dominat de testosteron." },
+    ],
+    infoText: "Identitatea ta este importantă pentru noi și o respectăm pe deplin. În procesul de personalizare a tratamentului, ne bazăm pe criterii bio-științifice riguroase. Deoarece bărbații și femeile au profiluri hormonale diferite (raportul dintre testosteron și estrogen), structura și nevoile părului variază semnificativ. Solicităm sexul atribuit la naștere exclusiv pentru a ne asigura că soluțiile oferite sunt corecte din punct de vedere metabolic și îți vor aduce cele mai bune rezultate.",
+  },
+  {
+    title: "Ai urmat sau urmezi în prezent terapie hormonală?",
+    options: [
+      { label: "Nu, nu am urmat terapie hormonală", description: "Nu ai utilizat tratamente hormonale care ar putea influența structura sau ciclul de creștere al părului." },
+      { label: "Da, terapie cu estrogen", description: "Persoană născută bărbat care a urmat/urmează terapie hormonală cu estrogen în cadrul tranziției de gen." },
+      { label: "Da, terapie cu testosteron", description: "Persoană născută femeie care a urmat/urmează terapie hormonală cu testosteron în cadrul tranziției de gen." },
+      { label: "Altele", description: "Alte forme de terapie hormonală (ex: contraceptive, tratamente pentru menopauză, terapii endocrine etc.)." },
+    ],
+  },
+  {
+    title: "Care este vârsta ta?",
+    options: [
+      { label: "18–22 ani", description: "Părul este de obicei la potențialul maxim de densitate și creștere. Hormonal, corpul încă se stabilizează." },
+      { label: "23–27 ani", description: "Perioada de maturitate capilară. Structura firului de păr este stabilă, iar producția de sebum se echilibrează." },
+      { label: "28–32 ani", description: "Pot apărea primele semne subtile de subțiere la persoanele predispuse genetic." },
+      { label: "33–37 ani", description: "Ciclul de creștere al părului poate începe să se scurteze. Hidratarea naturală a scalpului scade treptat." },
+      { label: "38–42 ani", description: "Schimbări hormonale mai pronunțate pot afecta textura și densitatea părului." },
+      { label: "43–47 ani", description: "Perimenopauza (femei) sau scăderea testosteronului (bărbați) influențează semnificativ calitatea părului." },
+      { label: "48–52 ani", description: "Firul de păr devine mai subțire și mai fragil. Pigmentarea naturală scade progresiv." },
+      { label: "53–57 ani", description: "Regenerarea celulară încetinește, iar părul necesită îngrijire mai intensă și nutritivă." },
+      { label: "58–62 ani", description: "Structura firului se modifică semnificativ. Scalpul devine mai sensibil și mai uscat." },
+      { label: "63–65 ani", description: "Îngrijirea trebuie adaptată la nevoile specifice ale părului matur, cu accent pe hidratare și protecție." },
+      { label: "Peste 65 ani", description: "Părul necesită cea mai delicată îngrijire, cu produse nutritive și regenerante adaptate vârstei." },
+    ],
+  },
+  {
     title: "Ce tip de scalp aveți?",
     type: "expandable",
     options: [
