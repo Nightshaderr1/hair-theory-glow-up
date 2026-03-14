@@ -155,15 +155,23 @@ export const questions: Question[] = [
     ],
   },
   {
-    title: "Suferiți de alopecie? Dacă da, ce tip de alopecie?",
+    title: "Suferiți de alopecie?",
+    type: "expandable",
     options: [
       { label: "Nu sufăr de alopecie", description: "Nu aveți probleme de cădere a părului sau de rărire vizibilă. Părul crește normal și nu prezintă semne de alopecie." },
-      { label: "Alopecia Androgenetică (Calviția Ereditară)", description: "Cea mai comună formă, cauzată de factori genetici și hormonali. Se manifestă prin retragerea liniei părului (bărbați) sau rărirea creștetului (femei)." },
-      { label: "Alopecia Areata (în Pete)", description: "Afecțiune autoimună care provoacă căderea părului în zone rotunde, delimitate. Include variante: Totalis (întregul scalp), Universalis (întregul corp), Ophiasis (fâșie pe conturul scalpului)." },
-      { label: "Efluviul Telogen (Alopecie Difuză)", description: "Cădere masivă, temporară, cauzată de stres, naștere, boli sau deficiențe nutriționale. De regulă reversibilă odată cu eliminarea cauzei." },
-      { label: "Alopecia de Tracțiune / Cicatricială", description: "De Tracțiune: provocată de coafuri foarte strânse (cozi, extensii) care tensionează foliculii. Cicatricială: distruge foliculul și îl înlocuiește cu țesut cicatricial (ex: lichen planopilar)." },
-      { label: "Tinea Capitis (Infecție Fungică)", description: "Infecție fungică a scalpului, frecventă la copii. Se manifestă prin zone de cădere a părului, mâncărime și descuamare." },
-      { label: "Alopecia indusă de tratamente", description: "Pierderea părului din cauza chimioterapiei sau radioterapiei. De regulă reversibilă după terminarea tratamentului." },
+      { label: "Am membri ai familiei cu alopecie genetică", description: "Deși nu suferiți personal de alopecie, aveți predispoziție genetică. Acest lucru ne ajută să recomandăm măsuri preventive adecvate." },
     ],
+    expandableOption: {
+      label: "Sufăr de alopecie",
+      description: "Experimentați căderea sau rărirea părului. Selectați pentru a identifica tipul specific de alopecie.",
+      subOptions: [
+        { label: "Alopecia Androgenetică (Calviția Ereditară)", description: "Cea mai comună formă, cauzată de factori genetici și hormonali. Se manifestă prin retragerea liniei părului (bărbați) sau rărirea creștetului (femei)." },
+        { label: "Alopecia Areata (în Pete)", description: "Afecțiune autoimună care provoacă căderea părului în zone rotunde, delimitate. Include variante: Totalis, Universalis, Ophiasis." },
+        { label: "Efluviul Telogen (Alopecie Difuză)", description: "Cădere masivă, temporară, cauzată de stres, naștere, boli sau deficiențe nutriționale. De regulă reversibilă." },
+        { label: "Alopecia de Tracțiune / Cicatricială", description: "De Tracțiune: provocată de coafuri strânse. Cicatricială: distruge foliculul și îl înlocuiește cu țesut cicatricial." },
+        { label: "Tinea Capitis (Infecție Fungică)", description: "Infecție fungică a scalpului, frecventă la copii. Se manifestă prin zone de cădere a părului, mâncărime și descuamare." },
+        { label: "Alopecia indusă de tratamente", description: "Pierderea părului din cauza chimioterapiei sau radioterapiei. De regulă reversibilă după terminarea tratamentului." },
+      ],
+    },
   },
 ];
