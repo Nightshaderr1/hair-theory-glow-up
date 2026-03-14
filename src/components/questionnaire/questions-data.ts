@@ -36,6 +36,17 @@ export const questions: Question[] = [
     ],
   },
   {
+    title: "Care este rasa/etnia ta?",
+    options: [
+      { label: "Alb", description: "Persoanele de origine europeană au de obicei păr cu textură fină până la medie, cu porozitate variabilă și densitate moderată." },
+      { label: "Negru sau afro-american", description: "Părul afro-texturat tinde să fie creț sau foarte creț, cu porozitate ridicată și nevoie intensă de hidratare și protecție." },
+      { label: "Asiatic", description: "Părul asiatic este de obicei drept, gros și cu porozitate scăzută. Firul este rezistent, dar poate fi dificil de stilizat." },
+      { label: "Caucazian", description: "Părul caucazian variază de la drept la ondulat, cu textură fină până la medie și densitate moderată." },
+      { label: "Hispanic", description: "Părul hispanic variază semnificativ, de la drept la foarte creț, cu textură medie spre groasă și tendință naturală spre volum." },
+      { label: "Altele", description: "Dacă etnia ta nu se regăsește în opțiunile de mai sus, selectează această variantă. Vom adapta recomandările pe baza celorlalte răspunsuri." },
+    ],
+  },
+  {
     title: "Ce tip de scalp aveți?",
     type: "expandable",
     options: [
