@@ -51,13 +51,19 @@ const Questionnaire = () => {
     return true;
   };
 
+  const scrollToTop = () => {
+    sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const goNext = () => {
     if (step < questions.length - 1) setStep(step + 1);
     else setSubmitted(true);
+    scrollToTop();
   };
 
   const goPrev = () => {
     if (step > 0) setStep(step - 1);
+    scrollToTop();
   };
 
   const getAnswerLabel = (qIndex: number): string => {
