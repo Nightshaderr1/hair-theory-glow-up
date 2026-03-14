@@ -10,6 +10,7 @@ import TwoStepHairType from "./questionnaire/TwoStepHairType";
 import PorosityQuestion from "./questionnaire/PorosityQuestion";
 
 const Questionnaire = () => {
+  const sectionRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<QuestionnaireAnswer[]>(
     questions.map(() => ({ optionIndex: null, subOptionIndex: null, expandableSubIndex: null }))
