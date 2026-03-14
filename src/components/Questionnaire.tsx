@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, ChevronLeft, CheckCircle2 } from "lucide-react";
 import RoutineResults from "./RoutineResults";
@@ -10,6 +10,7 @@ import TwoStepHairType from "./questionnaire/TwoStepHairType";
 import PorosityQuestion from "./questionnaire/PorosityQuestion";
 
 const Questionnaire = () => {
+  const sectionRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<QuestionnaireAnswer[]>(
     questions.map(() => ({ optionIndex: null, subOptionIndex: null, expandableSubIndex: null }))
@@ -50,13 +51,19 @@ const Questionnaire = () => {
     return true;
   };
 
+  const scrollToTop = () => {
+    sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const goNext = () => {
     if (step < questions.length - 1) setStep(step + 1);
     else setSubmitted(true);
+    scrollToTop();
   };
 
   const goPrev = () => {
     if (step > 0) setStep(step - 1);
+    scrollToTop();
   };
 
   const getAnswerLabel = (qIndex: number): string => {
@@ -235,7 +242,7 @@ const Questionnaire = () => {
   };
 
   return (
-    <section id="questionnaire" className="relative py-24 bg-sage/20 overflow-hidden">
+    <section id="questionnaire" ref={sectionRef} className="relative py-24 bg-sage/20 overflow-hidden">
       <QuestionnaireDecorations />
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
