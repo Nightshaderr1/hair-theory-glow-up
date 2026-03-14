@@ -242,7 +242,7 @@ const Questionnaire = () => {
   };
 
   return (
-    <section id="questionnaire" className="relative py-24 bg-sage/20 overflow-hidden">
+    <section id="questionnaire" ref={sectionRef} className="relative py-24 bg-sage/20 overflow-hidden">
       <QuestionnaireDecorations />
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
