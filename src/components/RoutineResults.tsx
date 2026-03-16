@@ -140,13 +140,16 @@ const RoutineResults = ({ answers, questions }: RoutineResultsProps) => {
               </ul>
 
               <button
-                className={`w-full py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 ${
-                  tier.popular
-                    ? "bg-accent text-accent-foreground"
-                    : "bg-primary text-primary-foreground"
+                disabled={'disabled' in tier && tier.disabled}
+                className={`w-full py-3 rounded-lg font-semibold transition-opacity ${
+                  'disabled' in tier && tier.disabled
+                    ? "bg-muted text-muted-foreground cursor-not-allowed"
+                    : tier.popular
+                      ? "bg-accent text-accent-foreground hover:opacity-90"
+                      : "bg-primary text-primary-foreground hover:opacity-90"
                 }`}
               >
-                Alege {tier.name}
+                {tier.buttonLabel}
               </button>
             </motion.div>
           );
