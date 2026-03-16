@@ -10,10 +10,11 @@ const tiers = [
   {
     name: "Basic",
     icon: Leaf,
-    price: "9.99",
-    oldPrice: "19.99",
+    price: "Gratuit",
+    oldPrice: null,
     color: "primary",
     description: "Rutină personalizată cu sfaturi și tehnici adaptate profilului tău capilar.",
+    buttonLabel: "Alege Basic - Recomandări AI",
     features: [
       "Rutină detaliată pas cu pas",
       "Sfaturi personalizate pentru tipul tău de scalp",
@@ -31,6 +32,8 @@ const tiers = [
     color: "accent",
     popular: true,
     description: "Tot ce include Basic, plus produse recomandate, video-uri demonstrative și calendar de rutină.",
+    buttonLabel: "Disponibil în curând",
+    disabled: true,
     features: [
       "Tot ce include rutina Basic",
       "Recomandări efective de produse specifice",
@@ -48,6 +51,8 @@ const tiers = [
     oldPrice: "199.99",
     color: "warm",
     description: "Experiența completă: consultații profesionale, produse ultra-naturale și sfaturi holistice.",
+    buttonLabel: "Disponibil în curând",
+    disabled: true,
     features: [
       "Tot ce include rutina Pro",
       "Consultație personalizată cu un dermatolog",
@@ -103,18 +108,26 @@ const RoutineResults = ({ answers, questions }: RoutineResultsProps) => {
               </div>
 
               <div className="text-center mb-6">
-                <span className="text-sm text-muted-foreground line-through mr-2">
-                  {tier.oldPrice}€
-                </span>
-                <span className="text-4xl font-display font-bold text-foreground">
-                  {tier.price}
-                </span>
-                <span className="text-muted-foreground ml-1">€</span>
-                <div className="mt-1">
-                  <span className="inline-block bg-secondary text-secondary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                    -50% PROMOȚIE
+                {tier.oldPrice ? (
+                  <>
+                    <span className="text-sm text-muted-foreground line-through mr-2">
+                      {tier.oldPrice}€
+                    </span>
+                    <span className="text-4xl font-display font-bold text-foreground">
+                      {tier.price}
+                    </span>
+                    <span className="text-muted-foreground ml-1">€</span>
+                    <div className="mt-1">
+                      <span className="inline-block bg-secondary text-secondary-foreground text-xs font-semibold px-3 py-1 rounded-full">
+                        -50% PROMOȚIE
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <span className="text-4xl font-display font-bold text-foreground">
+                    {tier.price}
                   </span>
-                </div>
+                )}
               </div>
 
               <ul className="space-y-3 flex-1 mb-8">
@@ -127,13 +140,16 @@ const RoutineResults = ({ answers, questions }: RoutineResultsProps) => {
               </ul>
 
               <button
-                className={`w-full py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 ${
-                  tier.popular
-                    ? "bg-accent text-accent-foreground"
-                    : "bg-primary text-primary-foreground"
+                disabled={'disabled' in tier && tier.disabled}
+                className={`w-full py-3 rounded-lg font-semibold transition-opacity ${
+                  'disabled' in tier && tier.disabled
+                    ? "bg-muted text-muted-foreground cursor-not-allowed"
+                    : tier.popular
+                      ? "bg-accent text-accent-foreground hover:opacity-90"
+                      : "bg-primary text-primary-foreground hover:opacity-90"
                 }`}
               >
-                Alege {tier.name}
+                {tier.buttonLabel}
               </button>
             </motion.div>
           );

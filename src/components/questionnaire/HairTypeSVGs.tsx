@@ -138,8 +138,8 @@ export const SlipTestSVG: React.FC<SVGProps> = ({ className }) => (
     <ellipse cx="110" cy="42" rx="12" ry="8" fill="hsl(var(--muted))" stroke="currentColor" strokeWidth="1.5" />
     <ellipse cx="110" cy="58" rx="12" ry="8" fill="hsl(var(--muted))" stroke="currentColor" strokeWidth="1.5" />
     {/* Direction arrow */}
-    <path d="M130 35 L80 35" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" />
-    <path d="M90 30 L80 35 L90 40" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M70 35 L120 35" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" />
+    <path d="M110 30 L120 35 L110 40" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     {/* Labels */}
     <text x="170" y="45" fontSize="10" fill="currentColor" textAnchor="end">Rădăcină</text>
     <text x="30" y="45" fontSize="10" fill="currentColor">Vârf</text>
