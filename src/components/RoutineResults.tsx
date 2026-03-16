@@ -108,18 +108,26 @@ const RoutineResults = ({ answers, questions }: RoutineResultsProps) => {
               </div>
 
               <div className="text-center mb-6">
-                <span className="text-sm text-muted-foreground line-through mr-2">
-                  {tier.oldPrice}€
-                </span>
-                <span className="text-4xl font-display font-bold text-foreground">
-                  {tier.price}
-                </span>
-                <span className="text-muted-foreground ml-1">€</span>
-                <div className="mt-1">
-                  <span className="inline-block bg-secondary text-secondary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                    -50% PROMOȚIE
+                {tier.oldPrice ? (
+                  <>
+                    <span className="text-sm text-muted-foreground line-through mr-2">
+                      {tier.oldPrice}€
+                    </span>
+                    <span className="text-4xl font-display font-bold text-foreground">
+                      {tier.price}
+                    </span>
+                    <span className="text-muted-foreground ml-1">€</span>
+                    <div className="mt-1">
+                      <span className="inline-block bg-secondary text-secondary-foreground text-xs font-semibold px-3 py-1 rounded-full">
+                        -50% PROMOȚIE
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <span className="text-4xl font-display font-bold text-foreground">
+                    {tier.price}
                   </span>
-                </div>
+                )}
               </div>
 
               <ul className="space-y-3 flex-1 mb-8">
