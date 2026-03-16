@@ -10,10 +10,11 @@ const tiers = [
   {
     name: "Basic",
     icon: Leaf,
-    price: "9.99",
-    oldPrice: "19.99",
+    price: "Gratuit",
+    oldPrice: null,
     color: "primary",
     description: "Rutină personalizată cu sfaturi și tehnici adaptate profilului tău capilar.",
+    buttonLabel: "Alege Basic - Recomandări AI",
     features: [
       "Rutină detaliată pas cu pas",
       "Sfaturi personalizate pentru tipul tău de scalp",
@@ -31,6 +32,8 @@ const tiers = [
     color: "accent",
     popular: true,
     description: "Tot ce include Basic, plus produse recomandate, video-uri demonstrative și calendar de rutină.",
+    buttonLabel: "Disponibil în curând",
+    disabled: true,
     features: [
       "Tot ce include rutina Basic",
       "Recomandări efective de produse specifice",
@@ -48,6 +51,8 @@ const tiers = [
     oldPrice: "199.99",
     color: "warm",
     description: "Experiența completă: consultații profesionale, produse ultra-naturale și sfaturi holistice.",
+    buttonLabel: "Disponibil în curând",
+    disabled: true,
     features: [
       "Tot ce include rutina Pro",
       "Consultație personalizată cu un dermatolog",

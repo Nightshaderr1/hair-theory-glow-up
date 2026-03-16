@@ -52,7 +52,9 @@ const Questionnaire = () => {
   };
 
   const scrollToTop = () => {
-    sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setTimeout(() => {
+      sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
   };
 
   const goNext = () => {
