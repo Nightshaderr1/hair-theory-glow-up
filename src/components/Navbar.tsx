@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { label: "Acasă", href: "#hero" },
@@ -29,6 +30,15 @@ const Navbar = () => {
             </a>
           ))}
         </div>
+        <div className="hidden md:flex items-center gap-3">
+          <Button variant="ghost" size="sm" className="text-foreground/70 hover:text-primary">
+            <User size={16} />
+            Log in
+          </Button>
+          <Button size="sm" className="rounded-full">
+            Sign up
+          </Button>
+        </div>
         <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -45,6 +55,15 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
+          <div className="flex gap-2 pt-2 border-t border-border">
+            <Button variant="ghost" size="sm" className="flex-1 text-foreground/70">
+              <User size={16} />
+              Log in
+            </Button>
+            <Button size="sm" className="flex-1 rounded-full">
+              Sign up
+            </Button>
+          </div>
         </div>
       )}
     </nav>
