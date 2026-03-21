@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Leaf, Star, Crown, Check, Calendar, Video, Utensils, UserCheck, Sparkles } from "lucide-react";
+import { Leaf, Star, Crown, Check, Calendar, Video, Utensils, UserCheck, Sparkles, ArrowRight, X, Droplets, Wind, Scissors, Heart, Apple, Moon } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 interface RoutineResultsProps {
   answers: (number | null)[];
@@ -66,7 +68,124 @@ const tiers = [
   },
 ];
 
+const BasicRoutineDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const tabs = [
+    { label: "Produse recomandate", icon: Droplets },
+    { label: "Rutina de aplicare", icon: Wind },
+    { label: "Sfaturi & Nutriție", icon: Heart },
+  ];
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto p-0">
+        <DialogHeader className="p-6 pb-0">
+          <DialogTitle className="text-2xl font-display font-bold text-foreground flex items-center gap-2">
+            <Leaf className="text-primary" size={28} />
+            Rutina ta Basic — Recomandări AI
+          </DialogTitle>
+        </DialogHeader>
+
+        {/* Tab navigation */}
+        <div className="flex border-b border-border px-6">
+          {tabs.map((tab, idx) => {
+            const TabIcon = tab.icon;
+            return (
+              <button
+                key={idx}
+                onClick={() => setActiveTab(idx)}
+                className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                  activeTab === idx
+                    ? "border-primary text-primary"
+                    : "border-transparent text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <TabIcon size={16} />
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Tab content */}
+        <div className="p-6 min-h-[300px]">
+          {activeTab === 0 && (
+            <div>
+              <h3 className="text-lg font-semibold text-foreground mb-4">Ordinea de aplicare a produselor</h3>
+              <div className="flex flex-col items-center gap-2">
+                {/* Empty product slots - to be populated later */}
+                {["Pasul 1", "Pasul 2", "Pasul 3", "Pasul 4", "Pasul 5"].map((step, i, arr) => (
+                  <div key={i} className="w-full">
+                    <div className="border-2 border-dashed border-border rounded-xl p-6 text-center">
+                      <p className="text-muted-foreground font-medium">{step}</p>
+                      <p className="text-xs text-muted-foreground/60 mt-1">Produs recomandat — va fi completat</p>
+                    </div>
+                    {i < arr.length - 1 && (
+                      <div className="flex justify-center py-1">
+                        <ArrowRight className="text-primary rotate-90" size={20} />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 1 && (
+            <div>
+              <h3 className="text-lg font-semibold text-foreground mb-4">Cum să aplici fiecare produs</h3>
+              <div className="space-y-4">
+                {["Pasul 1", "Pasul 2", "Pasul 3", "Pasul 4", "Pasul 5"].map((step, i) => (
+                  <div key={i} className="border border-border rounded-xl p-5">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">
+                        {i + 1}
+                      </span>
+                      <h4 className="font-semibold text-foreground">{step}</h4>
+                    </div>
+                    <p className="text-sm text-muted-foreground ml-11">
+                      Instrucțiuni de aplicare — vor fi completate ulterior.
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 2 && (
+            <div>
+              <h3 className="text-lg font-semibold text-foreground mb-4">Sfaturi pentru sănătate și nutriție</h3>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  { icon: Apple, title: "Nutriție", placeholder: "Sfaturi alimentare — vor fi completate." },
+                  { icon: Droplets, title: "Hidratare", placeholder: "Recomandări de hidratare — vor fi completate." },
+                  { icon: Moon, title: "Odihnă", placeholder: "Sfaturi pentru somn — vor fi completate." },
+                  { icon: Scissors, title: "Îngrijire generală", placeholder: "Sfaturi generale — vor fi completate." },
+                ].map((card, i) => {
+                  const CardIcon = card.icon;
+                  return (
+                    <div key={i} className="border border-border rounded-xl p-5">
+                      <div className="flex items-center gap-2 mb-3">
+                        <CardIcon className="text-primary" size={20} />
+                        <h4 className="font-semibold text-foreground">{card.title}</h4>
+                      </div>
+                      <p className="text-sm text-muted-foreground">{card.placeholder}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 const RoutineResults = ({ answers, questions }: RoutineResultsProps) => {
+  const [showBasicDialog, setShowBasicDialog] = useState(false);
+
   return (
     <div>
       <div className="text-center mb-12">
@@ -81,6 +200,7 @@ const RoutineResults = ({ answers, questions }: RoutineResultsProps) => {
       <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {tiers.map((tier, idx) => {
           const Icon = tier.icon;
+          const isBasic = tier.name === "Basic";
           return (
             <motion.div
               key={tier.name}
@@ -141,6 +261,7 @@ const RoutineResults = ({ answers, questions }: RoutineResultsProps) => {
 
               <button
                 disabled={'disabled' in tier && tier.disabled}
+                onClick={isBasic ? () => setShowBasicDialog(true) : undefined}
                 className={`w-full py-3 rounded-lg font-semibold transition-opacity ${
                   'disabled' in tier && tier.disabled
                     ? "bg-muted text-muted-foreground cursor-not-allowed"
@@ -155,6 +276,8 @@ const RoutineResults = ({ answers, questions }: RoutineResultsProps) => {
           );
         })}
       </div>
+
+      <BasicRoutineDialog open={showBasicDialog} onOpenChange={setShowBasicDialog} />
     </div>
   );
 };
