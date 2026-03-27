@@ -1,6 +1,7 @@
 import { Question } from "./types";
 
 export const questions: Question[] = [
+  // === DEMOGRAPHIC QUESTIONS ===
   {
     title: "Cu ce sex ai fost identificat(ă) la naștere?",
     type: "info-card",
@@ -9,15 +10,6 @@ export const questions: Question[] = [
       { label: "Bărbat", description: "Sexul biologic masculin, asociat cu un profil hormonal dominat de testosteron." },
     ],
     infoText: "Identitatea ta este importantă pentru noi și o respectăm pe deplin. În procesul de personalizare a tratamentului, ne bazăm pe criterii bio-științifice riguroase. Deoarece bărbații și femeile au profiluri hormonale diferite (raportul dintre testosteron și estrogen), structura și nevoile părului variază semnificativ. Solicităm sexul atribuit la naștere exclusiv pentru a ne asigura că soluțiile oferite sunt corecte din punct de vedere metabolic și îți vor aduce cele mai bune rezultate.",
-  },
-  {
-    title: "Ai urmat sau urmezi în prezent terapie hormonală?",
-    options: [
-      { label: "Nu, nu am urmat terapie hormonală", description: "Nu ai utilizat tratamente hormonale care ar putea influența structura sau ciclul de creștere al părului." },
-      { label: "Da, terapie cu estrogen", description: "Persoană născută bărbat care a urmat/urmează terapie hormonală cu estrogen în cadrul tranziției de gen." },
-      { label: "Da, terapie cu testosteron", description: "Persoană născută femeie care a urmat/urmează terapie hormonală cu testosteron în cadrul tranziției de gen." },
-      { label: "Altele", description: "Alte forme de terapie hormonală (ex: contraceptive, tratamente pentru menopauză, terapii endocrine etc.)." },
-    ],
   },
   {
     title: "Care este vârsta ta?",
@@ -46,28 +38,8 @@ export const questions: Question[] = [
       { label: "Altele", description: "Dacă etnia ta nu se regăsește în opțiunile de mai sus, selectează această variantă. Vom adapta recomandările pe baza celorlalte răspunsuri." },
     ],
   },
-  {
-    title: "Ce tip de scalp aveți?",
-    type: "expandable",
-    options: [
-      { label: "Scalp uscat", description: "Simți des senzație de strângere, mâncărime sau observi fulgi mici? Scalpul tău produce puțin sebum, ceea ce duce la uscăciune." },
-      { label: "Scalp cu tendință de îngrășare", description: "Părul tău devine gras la rădăcini la scurt timp după spălare? Scalpul produce sebum în exces, dând un aspect lucios și lipicios." },
-      { label: "Scalp mixt", description: "Ai zone grase la rădăcini dar vârfuri uscate? Scalpul mixt combină caracteristici ale celor două tipuri." },
-      { label: "Scalp vopsit/tratat chimic", description: "Ai folosit recent vopsea, decolorant sau tratamente chimice? Aceste proceduri pot sensibiliza scalpul și modifica structura părului." },
-    ],
-    expandableOption: {
-      label: "Scalp cu probleme dermatologice",
-      description: "Ai simptome persistente precum mâncărime intensă, inflamație, scuame sau zone fără păr? Selectează pentru a identifica problema specifică.",
-      subOptions: [
-        { label: "Dermatită seboreică", description: "Mătreață grasă, scuame gălbui și senzație de mâncărime." },
-        { label: "Psoriazis", description: "Plăci groase, bine delimitate, acoperite de scuame argintii." },
-        { label: "Dermatită de contact", description: "Reacție alergică sau iritație cauzată de produse externe." },
-        { label: "Tinea capitis", description: "Infecție fungică a scalpului care poate cauza zone fără păr." },
-        { label: "Foliculită", description: "Inflamația foliculilor de păr, manifestată prin mici coșuri roșii." },
-        { label: "Dermatită", description: "Inflamație generală a pielii, însoțită de roșeață și sensibilitate." },
-      ],
-    },
-  },
+
+  // === HAIR & SCALP QUESTIONS ===
   {
     title: "Ce tip de păr ai?",
     type: "two-step",
@@ -127,6 +99,18 @@ export const questions: Question[] = [
     },
   },
   {
+    title: "Cât de lung este părul tău?",
+    options: [
+      { label: "Foarte scurt (sub 5 cm)", description: "Părul abia acoperă scalpul. Stilizarea este limitată, dar îngrijirea scalpului devine prioritară." },
+      { label: "Scurt (5–15 cm)", description: "Părul ajunge până la urechi sau puțin sub. Ușor de întreținut, dar necesită tunderi regulate pentru a menține forma." },
+      { label: "Mediu (15–30 cm)", description: "Părul ajunge până la umeri. Oferă versatilitate în stilizare, dar necesită mai multă atenție la hidratare și protecție." },
+      { label: "Lung (30–50 cm)", description: "Părul depășește umerii. Vârfurile sunt mai predispuse la deteriorare și necesită îngrijire intensivă." },
+      { label: "Foarte lung (peste 50 cm)", description: "Părul ajunge sub mijlocul spatelui. Necesită rutine dedicate de îngrijire, cu accent pe nutriție și prevenirea ruperii." },
+    ],
+  },
+
+  // === HABITS QUESTIONS ===
+  {
     title: "Cât de des te speli pe cap?",
     options: [
       { label: "Zilnic", description: "Te speli pe cap în fiecare zi. Spălatul frecvent poate elimina uleiurile naturale ale scalpului, ducând la uscăciune sau la producție excesivă de sebum compensator." },
@@ -155,16 +139,6 @@ export const questions: Question[] = [
     ],
   },
   {
-    title: "Cât de lung este părul tău?",
-    options: [
-      { label: "Foarte scurt (sub 5 cm)", description: "Părul abia acoperă scalpul. Stilizarea este limitată, dar îngrijirea scalpului devine prioritară." },
-      { label: "Scurt (5–15 cm)", description: "Părul ajunge până la urechi sau puțin sub. Ușor de întreținut, dar necesită tunderi regulate pentru a menține forma." },
-      { label: "Mediu (15–30 cm)", description: "Părul ajunge până la umeri. Oferă versatilitate în stilizare, dar necesită mai multă atenție la hidratare și protecție." },
-      { label: "Lung (30–50 cm)", description: "Părul depășește umerii. Vârfurile sunt mai predispuse la deteriorare și necesită îngrijire intensivă." },
-      { label: "Foarte lung (peste 50 cm)", description: "Părul ajunge sub mijlocul spatelui. Necesită rutine dedicate de îngrijire, cu accent pe nutriție și prevenirea ruperii." },
-    ],
-  },
-  {
     title: "Cum îți porți părul cel mai des?",
     options: [
       { label: "Liber / Desfăcut", description: "Părul este lăsat să cadă natural, fără accesorii sau coafuri strânse. Permite aerisirea scalpului, dar poate fi expus la factori externi." },
@@ -173,6 +147,41 @@ export const questions: Question[] = [
       { label: "Cu accesorii (căciulă, șapcă, batic)", description: "Părul este acoperit frecvent. Fricțiunea cu materialele textile poate cauza frizz, electricitate statică sau ruperea firului." },
       { label: "Stilizat cu căldură (placă, ondulator)", description: "Folosești regulat instrumente termice pentru stilizare. Căldura repetată poate deteriora cuticulele și deshidrata firul de păr." },
     ],
+  },
+
+  // === MEDICAL QUESTIONS (last) ===
+  {
+    title: "Ce tip de scalp aveți?",
+    type: "expandable",
+    options: [
+      { label: "Scalp uscat", description: "Simți des senzație de strângere, mâncărime sau observi fulgi mici? Scalpul tău produce puțin sebum, ceea ce duce la uscăciune." },
+      { label: "Scalp cu tendință de îngrășare", description: "Părul tău devine gras la rădăcini la scurt timp după spălare? Scalpul produce sebum în exces, dând un aspect lucios și lipicios." },
+      { label: "Scalp mixt", description: "Ai zone grase la rădăcini dar vârfuri uscate? Scalpul mixt combină caracteristici ale celor două tipuri." },
+      { label: "Scalp vopsit/tratat chimic", description: "Ai folosit recent vopsea, decolorant sau tratamente chimice? Aceste proceduri pot sensibiliza scalpul și modifica structura părului." },
+    ],
+    expandableOption: {
+      label: "Scalp cu probleme dermatologice",
+      description: "Ai simptome persistente precum mâncărime intensă, inflamație, scuame sau zone fără păr? Selectează pentru a identifica problema specifică.",
+      subOptions: [
+        { label: "Dermatită seboreică", description: "Mătreață grasă, scuame gălbui și senzație de mâncărime." },
+        { label: "Psoriazis", description: "Plăci groase, bine delimitate, acoperite de scuame argintii." },
+        { label: "Dermatită de contact", description: "Reacție alergică sau iritație cauzată de produse externe." },
+        { label: "Tinea capitis", description: "Infecție fungică a scalpului care poate cauza zone fără păr." },
+        { label: "Foliculită", description: "Inflamația foliculilor de păr, manifestată prin mici coșuri roșii." },
+        { label: "Dermatită", description: "Inflamație generală a pielii, însoțită de roșeață și sensibilitate." },
+      ],
+    },
+    medicalTrigger: 'expandable',
+  },
+  {
+    title: "Ai urmat sau urmezi în prezent terapie hormonală?",
+    options: [
+      { label: "Nu, nu am urmat terapie hormonală", description: "Nu ai utilizat tratamente hormonale care ar putea influența structura sau ciclul de creștere al părului." },
+      { label: "Da, terapie cu estrogen", description: "Persoană născută bărbat care a urmat/urmează terapie hormonală cu estrogen în cadrul tranziției de gen." },
+      { label: "Da, terapie cu testosteron", description: "Persoană născută femeie care a urmat/urmează terapie hormonală cu testosteron în cadrul tranziției de gen." },
+      { label: "Altele", description: "Alte forme de terapie hormonală (ex: contraceptive, tratamente pentru menopauză, terapii endocrine etc.)." },
+    ],
+    medicalTrigger: [1, 2, 3], // Any option except "Nu" triggers medical flag
   },
   {
     title: "Suferiți de alopecie?",
@@ -193,5 +202,6 @@ export const questions: Question[] = [
         { label: "Alopecia indusă de tratamente", description: "Pierderea părului din cauza chimioterapiei sau radioterapiei. De regulă reversibilă după terminarea tratamentului." },
       ],
     },
+    medicalTrigger: 'expandable',
   },
 ];
