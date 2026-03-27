@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 interface RoutineResultsProps {
   answers: (number | null)[];
   questions: { title: string; options: { label: string; description: string }[] }[];
+  hasMedicalCondition?: boolean;
 }
 
 const tiers = [
