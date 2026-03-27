@@ -184,7 +184,7 @@ const BasicRoutineDialog = ({ open, onOpenChange }: { open: boolean; onOpenChang
   );
 };
 
-const RoutineResults = ({ answers, questions }: RoutineResultsProps) => {
+const RoutineResults = ({ answers, questions, hasMedicalCondition = false }: RoutineResultsProps) => {
   const [showBasicDialog, setShowBasicDialog] = useState(false);
 
   return (
