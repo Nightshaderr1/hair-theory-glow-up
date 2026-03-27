@@ -150,7 +150,7 @@ const Questionnaire = () => {
             </motion.button>
           </motion.div>
 
-          <RoutineResults answers={legacyAnswers} questions={legacyQuestions} />
+          <RoutineResults answers={legacyAnswers} questions={legacyQuestions} hasMedicalCondition={hasMedicalCondition} />
         </div>
       </section>
     );
