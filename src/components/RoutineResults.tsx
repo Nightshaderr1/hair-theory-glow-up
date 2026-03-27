@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Leaf, Star, Crown, Check, Calendar, Video, Utensils, UserCheck, Sparkles, ArrowRight, X, Droplets, Wind, Scissors, Heart, Apple, Moon } from "lucide-react";
+import { Leaf, Star, Crown, Check, Calendar, Video, Utensils, UserCheck, Sparkles, ArrowRight, X, Droplets, Wind, Scissors, Heart, Apple, Moon, ShieldAlert } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 interface RoutineResultsProps {
