@@ -214,6 +214,18 @@ const RoutineResults = ({ answers, questions, hasMedicalCondition = false }: Rou
                   : "border-border shadow-lg"
               }`}
             >
+              {/* Medical overlay for Basic tier */}
+              {isBasic && hasMedicalCondition && (
+                <div className="absolute inset-0 z-20 bg-card/90 backdrop-blur-sm rounded-2xl flex flex-col items-center justify-center p-8 text-center">
+                  <ShieldAlert className="text-destructive mb-4" size={48} />
+                  <h4 className="text-lg font-display font-bold text-foreground mb-2">
+                    Recomandări AI indisponibile
+                  </h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+                    Din păcate, AI-ul nu are voie să ofere sfaturi medicale. Profilul tău include condiții care necesită consultarea unui expert uman. Te rugăm să alegi una dintre variantele Pro sau Royal pentru recomandări personalizate de la specialiști.
+                  </p>
+                </div>
+              )}
               {tier.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
                   Cel mai popular
