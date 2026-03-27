@@ -88,6 +88,19 @@ const Questionnaire = () => {
     return q.options[a.optionIndex]?.label ?? "—";
   };
 
+  // Detect if any medical condition was selected
+  const hasMedicalCondition = questions.some((q, qIdx) => {
+    const a = answers[qIdx];
+    if (a.optionIndex === null || !q.medicalTrigger) return false;
+    if (q.medicalTrigger === 'expandable') {
+      return a.optionIndex === q.options.length; // expandable option selected
+    }
+    if (Array.isArray(q.medicalTrigger)) {
+      return q.medicalTrigger.includes(a.optionIndex);
+    }
+    return false;
+  });
+
   // Convert to legacy format for RoutineResults
   const legacyAnswers = answers.map(a => a.optionIndex);
   const legacyQuestions = questions.map(q => ({
@@ -137,7 +150,7 @@ const Questionnaire = () => {
             </motion.button>
           </motion.div>
 
-          <RoutineResults answers={legacyAnswers} questions={legacyQuestions} />
+          <RoutineResults answers={legacyAnswers} questions={legacyQuestions} hasMedicalCondition={hasMedicalCondition} />
         </div>
       </section>
     );

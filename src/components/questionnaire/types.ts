@@ -25,6 +25,10 @@ export interface Question {
     instructions: string;
     results: { condition: string; result: string }[];
   };
+  // If set, selecting certain options triggers a medical flag
+  // 'expandable' = selecting the expandable option triggers it
+  // number[] = selecting any of these option indices triggers it
+  medicalTrigger?: 'expandable' | number[];
 }
 
 export interface QuestionnaireAnswer {
