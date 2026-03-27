@@ -4,6 +4,12 @@ import { ChevronLeft } from "lucide-react";
 import { Question, QuestionnaireAnswer } from "./types";
 import { StraightHairSVG, WavyHairSVG, CurlyHairSVG, VeryСurlyHairSVG } from "./HairTypeSVGs";
 
+import hairStraightImg from "@/assets/hair-type-straight.png";
+import hairWavyImg from "@/assets/hair-type-wavy.png";
+import hairCurlyImg from "@/assets/hair-type-curly.png";
+import hairVeryCurlyImg from "@/assets/hair-type-very-curly.png";
+
+const mainImages = [hairStraightImg, hairWavyImg, hairCurlyImg, hairVeryCurlyImg];
 const mainIcons = [StraightHairSVG, WavyHairSVG, CurlyHairSVG, VeryСurlyHairSVG];
 const subVariants = ['A', 'B', 'C'] as const;
 
@@ -26,7 +32,6 @@ const TwoStepHairType = ({ question, answer, onSelect }: Props) => {
 
   const handleMainSelect = (i: number) => {
     setSelectedMain(i);
-    // Don't set answer yet, wait for subcategory
   };
 
   const handleSubSelect = (subIdx: number) => {
@@ -52,7 +57,6 @@ const TwoStepHairType = ({ question, answer, onSelect }: Props) => {
             className="grid grid-cols-2 gap-4"
           >
             {question.options.map((opt, i) => {
-              const Icon = mainIcons[i];
               const isSelected = answer.optionIndex === i && answer.subOptionIndex !== null;
               return (
                 <motion.button
@@ -66,7 +70,14 @@ const TwoStepHairType = ({ question, answer, onSelect }: Props) => {
                       : "border-border bg-card hover:border-primary/40 hover:shadow-sm"
                   }`}
                 >
-                  <Icon className="w-16 h-16 text-primary" />
+                  <img
+                    src={mainImages[i]}
+                    alt={opt.label}
+                    className="w-24 h-24 object-contain"
+                    loading="lazy"
+                    width={512}
+                    height={512}
+                  />
                   <span className="font-semibold text-foreground">{opt.label}</span>
                   <p className="text-xs text-muted-foreground leading-relaxed">{opt.description}</p>
                   {isSelected && answer.subOptionIndex !== null && question.subCategories?.[i] && (
