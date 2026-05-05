@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const porosityIcons = [LowPorositySVG, MediumPorositySVG, HighPorositySVG];
 
@@ -20,6 +21,7 @@ interface Props {
 }
 
 const PorosityQuestion = ({ question, answer, onSelect }: Props) => {
+  const { t } = useLanguage();
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -45,8 +47,8 @@ const PorosityQuestion = ({ question, answer, onSelect }: Props) => {
                 <Icon className="w-12 h-12 text-foreground" />
               </div>
               <div>
-                <span className="font-semibold text-foreground">{opt.label}</span>
-                <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{opt.description}</p>
+                <span className="font-semibold text-foreground">{t(opt.label)}</span>
+                <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{t(opt.description)}</p>
               </div>
             </motion.button>
           );
@@ -62,7 +64,7 @@ const PorosityQuestion = ({ question, answer, onSelect }: Props) => {
           className="mt-4 w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg border border-dashed border-primary/40 text-primary text-sm font-medium hover:bg-primary/5 transition-colors"
         >
           <HelpCircle size={16} />
-          {question.testModal.buttonLabel}
+          {t(question.testModal.buttonLabel)}
         </motion.button>
       )}
 
@@ -71,10 +73,10 @@ const PorosityQuestion = ({ question, answer, onSelect }: Props) => {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle className="text-xl font-display">
-              {question.testModal?.title}
+              {t(question.testModal?.title ?? "")}
             </DialogTitle>
             <DialogDescription className="sr-only">
-              Instrucțiuni pentru testul de porozitate
+              {t("Instrucțiuni pentru testul de porozitate")}
             </DialogDescription>
           </DialogHeader>
 
@@ -84,15 +86,15 @@ const PorosityQuestion = ({ question, answer, onSelect }: Props) => {
             </div>
 
             <p className="text-sm text-muted-foreground leading-relaxed">
-              {question.testModal?.instructions}
+              {t(question.testModal?.instructions ?? "")}
             </p>
 
             <div className="space-y-3">
-              <h4 className="font-semibold text-foreground text-sm">Interpretare:</h4>
+              <h4 className="font-semibold text-foreground text-sm">{t("Interpretare:")}</h4>
               {question.testModal?.results.map((r, i) => (
                 <div key={i} className="bg-muted rounded-lg p-3">
-                  <p className="text-sm text-muted-foreground">{r.condition}</p>
-                  <p className="text-sm font-semibold text-primary mt-1">→ {r.result}</p>
+                  <p className="text-sm text-muted-foreground">{t(r.condition)}</p>
+                  <p className="text-sm font-semibold text-primary mt-1">→ {t(r.result)}</p>
                 </div>
               ))}
             </div>
@@ -103,7 +105,7 @@ const PorosityQuestion = ({ question, answer, onSelect }: Props) => {
               onClick={() => setShowModal(false)}
               className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
             >
-              Am înțeles
+              {t("Am înțeles")}
             </motion.button>
           </div>
         </DialogContent>
