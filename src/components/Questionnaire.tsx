@@ -177,8 +177,8 @@ const Questionnaire = () => {
                       : "border-border bg-card hover:border-primary/40 hover:shadow-sm"
                   }`}
                 >
-                  <span className="text-lg font-semibold text-foreground">{opt.label}</span>
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{opt.description}</p>
+                  <span className="text-lg font-semibold text-foreground">{t(opt.label)}</span>
+                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{t(opt.description)}</p>
                 </motion.button>
               );
             })}
@@ -192,7 +192,7 @@ const Questionnaire = () => {
             >
               <div className="flex items-start gap-3">
                 <span className="text-primary mt-0.5 text-xl shrink-0">❤️</span>
-                <p className="text-sm text-muted-foreground leading-relaxed">{currentQ.infoText}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{t(currentQ.infoText)}</p>
               </div>
             </motion.div>
           )}
@@ -248,8 +248,8 @@ const Questionnaire = () => {
                   : "border-border bg-card hover:border-primary/40 hover:shadow-sm"
               }`}
             >
-              <span className="font-semibold text-foreground">{opt.label}</span>
-              <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{opt.description}</p>
+              <span className="font-semibold text-foreground">{t(opt.label)}</span>
+              <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{t(opt.description)}</p>
             </motion.button>
           );
         })}
@@ -263,10 +263,10 @@ const Questionnaire = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            Chestionarul Hair Theory
+            {t("Chestionarul Hair Theory")}
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Răspunde la {questions.length} întrebări simple pentru a descoperi profilul unic al părului tău.
+            {t("Răspunde la")} {questions.length} {t("întrebări simple pentru a descoperi profilul unic al părului tău.")}
           </p>
         </div>
 
@@ -298,7 +298,7 @@ const Questionnaire = () => {
               transition={{ duration: 0.35 }}
             >
               <h3 className="text-2xl font-display font-semibold text-foreground mb-6">
-                {currentQ.title}
+                {t(currentQ.title)}
               </h3>
               {renderQuestion()}
             </motion.div>
@@ -312,7 +312,7 @@ const Questionnaire = () => {
               disabled={step === 0}
               className="flex items-center gap-1 text-muted-foreground hover:text-foreground disabled:opacity-30 transition-colors"
             >
-              <ChevronLeft size={20} /> Înapoi
+              <ChevronLeft size={20} /> {t("Înapoi")}
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -321,7 +321,7 @@ const Questionnaire = () => {
               disabled={!isCurrentAnswered()}
               className="flex items-center gap-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 disabled:opacity-40 transition-opacity"
             >
-              {step === questions.length - 1 ? "Finalizează" : "Următoarea"}
+              {step === questions.length - 1 ? t("Finalizează") : t("Următoarea")}
               <ChevronRight size={20} />
             </motion.button>
           </div>
