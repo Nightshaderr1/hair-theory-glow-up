@@ -19,7 +19,6 @@ export const translations: Record<string, string> = {
   "Ilustrație botanică Hair Theory": "Hair Theory botanical illustration",
 
   // === About ===
-  "Despre noi": "About us",
   "Misiunea Hair Theory": "The Hair Theory Mission",
   "credem că fiecare persoană merită să înțeleagă și să iubească părul pe care îl are. Misiunea noastră este de a transforma știința tricologică în sfaturi practice, accesibile tuturor — pentru un păr sănătos, frumos și plin de vitalitate.":
     "we believe every person deserves to understand and love the hair they have. Our mission is to turn trichology science into practical, accessible advice for everyone — for healthy, beautiful, vibrant hair.",
