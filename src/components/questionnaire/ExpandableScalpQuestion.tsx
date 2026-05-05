@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertCircle } from "lucide-react";
 import { Question, QuestionnaireAnswer } from "./types";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Props {
   question: Question;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const ExpandableScalpQuestion = ({ question, answer, onSelect }: Props) => {
+  const { t } = useLanguage();
   const isExpandedSelected = answer.optionIndex === question.options.length;
   const expandable = question.expandableOption;
 
@@ -29,8 +31,8 @@ const ExpandableScalpQuestion = ({ question, answer, onSelect }: Props) => {
                 : "border-border bg-card hover:border-primary/40 hover:shadow-sm"
             }`}
           >
-            <span className="font-semibold text-foreground">{opt.label}</span>
-            <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{opt.description}</p>
+            <span className="font-semibold text-foreground">{t(opt.label)}</span>
+            <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{t(opt.description)}</p>
           </motion.button>
         );
       })}
@@ -51,9 +53,9 @@ const ExpandableScalpQuestion = ({ question, answer, onSelect }: Props) => {
           >
             <div className="flex items-center gap-2">
               <AlertCircle size={18} className="text-accent-foreground shrink-0" />
-              <span className="font-semibold text-foreground">{expandable.label}</span>
+              <span className="font-semibold text-foreground">{t(expandable.label)}</span>
             </div>
-            <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{expandable.description}</p>
+            <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{t(expandable.description)}</p>
           </motion.button>
 
           <AnimatePresence>
@@ -94,8 +96,8 @@ const ExpandableScalpQuestion = ({ question, answer, onSelect }: Props) => {
                           )}
                         </div>
                         <div>
-                          <span className="font-medium text-foreground text-sm">{sub.label}</span>
-                          <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{sub.description}</p>
+                          <span className="font-medium text-foreground text-sm">{t(sub.label)}</span>
+                          <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{t(sub.description)}</p>
                         </div>
                       </motion.button>
                     );
