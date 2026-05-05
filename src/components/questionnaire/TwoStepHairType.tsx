@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { Question, QuestionnaireAnswer } from "./types";
 import { StraightHairSVG, WavyHairSVG, CurlyHairSVG, VeryСurlyHairSVG } from "./HairTypeSVGs";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 import hairStraightImg from "@/assets/hair-type-straight.png";
 import hairWavyImg from "@/assets/hair-type-wavy.png";
@@ -25,6 +26,7 @@ interface Props {
 }
 
 const TwoStepHairType = ({ question, answer, onSelect }: Props) => {
+  const { t } = useLanguage();
   const [selectedMain, setSelectedMain] = useState<number | null>(
     answer.optionIndex !== null && answer.subOptionIndex !== null ? answer.optionIndex : null
   );
@@ -72,14 +74,14 @@ const TwoStepHairType = ({ question, answer, onSelect }: Props) => {
                 >
                   <img
                     src={mainImages[i]}
-                    alt={opt.label}
+                    alt={t(opt.label)}
                     className="w-24 h-24 object-contain"
                     loading="lazy"
                     width={512}
                     height={512}
                   />
-                  <span className="font-semibold text-foreground">{opt.label}</span>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{opt.description}</p>
+                  <span className="font-semibold text-foreground">{t(opt.label)}</span>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{t(opt.description)}</p>
                   {isSelected && answer.subOptionIndex !== null && question.subCategories?.[i] && (
                     <span className="text-xs font-medium text-primary mt-1">
                       ✓ {question.subCategories[i][answer.subOptionIndex!].code}
@@ -101,11 +103,11 @@ const TwoStepHairType = ({ question, answer, onSelect }: Props) => {
               onClick={handleBack}
               className="flex items-center gap-1 text-muted-foreground hover:text-foreground mb-4 transition-colors text-sm"
             >
-              <ChevronLeft size={16} /> Înapoi la categorii
+              <ChevronLeft size={16} /> {t("Înapoi la categorii")}
             </button>
 
             <p className="text-sm text-muted-foreground mb-4">
-              Ai ales <span className="font-semibold text-foreground">{question.options[selectedMain!].label}</span>. Selectează subtipul:
+              {t("Ai ales")} <span className="font-semibold text-foreground">{t(question.options[selectedMain!].label)}</span>{t(". Selectează subtipul:")}
             </p>
 
             <div className="grid gap-3">
@@ -131,8 +133,8 @@ const TwoStepHairType = ({ question, answer, onSelect }: Props) => {
                     </div>
                     <div>
                       <span className="font-bold text-primary text-lg">{sub.code}</span>
-                      <span className="font-semibold text-foreground ml-2">{sub.label}</span>
-                      <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{sub.description}</p>
+                      <span className="font-semibold text-foreground ml-2">{t(sub.label)}</span>
+                      <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{t(sub.description)}</p>
                     </div>
                   </motion.button>
                 );
