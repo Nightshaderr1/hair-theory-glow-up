@@ -8,8 +8,10 @@ import { QuestionnaireAnswer } from "./questionnaire/types";
 import ExpandableScalpQuestion from "./questionnaire/ExpandableScalpQuestion";
 import TwoStepHairType from "./questionnaire/TwoStepHairType";
 import PorosityQuestion from "./questionnaire/PorosityQuestion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Questionnaire = () => {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<QuestionnaireAnswer[]>(
@@ -75,17 +77,17 @@ const Questionnaire = () => {
 
     if (q.type === "expandable" && a.optionIndex === q.options.length && q.expandableOption) {
       const subLabel = a.expandableSubIndex !== null
-        ? q.expandableOption.subOptions[a.expandableSubIndex].label
+        ? t(q.expandableOption.subOptions[a.expandableSubIndex].label)
         : "";
-      return `${q.expandableOption.label}${subLabel ? ` — ${subLabel}` : ""}`;
+      return `${t(q.expandableOption.label)}${subLabel ? ` — ${subLabel}` : ""}`;
     }
 
     if (q.type === "two-step" && q.subCategories && a.subOptionIndex !== null) {
       const sub = q.subCategories[a.optionIndex]?.[a.subOptionIndex];
-      return `${q.options[a.optionIndex].label} — ${sub?.code} ${sub?.label}`;
+      return `${t(q.options[a.optionIndex].label)} — ${sub?.code} ${t(sub?.label ?? "")}`;
     }
 
-    return q.options[a.optionIndex]?.label ?? "—";
+    return t(q.options[a.optionIndex]?.label ?? "—");
   };
 
   // Detect if any medical condition was selected
@@ -120,16 +122,15 @@ const Questionnaire = () => {
           >
             <CheckCircle2 className="mx-auto mb-6 text-primary" size={64} />
             <h2 className="text-3xl font-display font-bold text-foreground mb-4">
-              Mulțumim!
+              {t("Mulțumim!")}
             </h2>
             <p className="text-muted-foreground text-lg mb-6">
-              Profilul tău a fost salvat. Pe baza răspunsurilor tale, îți vom oferi recomandări
-              personalizate pentru îngrijirea părului.
+              {t("Profilul tău a fost salvat. Pe baza răspunsurilor tale, îți vom oferi recomandări personalizate pentru îngrijirea părului.")}
             </p>
             <div className="bg-muted rounded-xl p-6 text-left space-y-3">
               {questions.map((q, i) => (
                 <div key={i}>
-                  <span className="text-sm font-medium text-foreground">{q.title}</span>
+                  <span className="text-sm font-medium text-foreground">{t(q.title)}</span>
                   <span className="ml-2 text-sm text-primary font-semibold">
                     {getAnswerLabel(i)}
                   </span>
@@ -146,7 +147,7 @@ const Questionnaire = () => {
               }}
               className="mt-8 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
             >
-              Reia chestionarul
+              {t("Reia chestionarul")}
             </motion.button>
           </motion.div>
 
