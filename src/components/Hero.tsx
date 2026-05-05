@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { HeroDecorations } from "./BotanicalDecorations";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
+  const { t } = useLanguage();
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-sage/30 via-background to-rose/20" />
@@ -17,12 +19,11 @@ const Hero = () => {
             Hair Theory
           </h1>
           <p className="text-2xl md:text-3xl lg:text-4xl font-display font-semibold text-foreground leading-tight mb-6">
-            Descoperă secretele <br />
-            <span className="text-primary">părului tău</span>
+            {t("Descoperă secretele")} <br />
+            <span className="text-primary">{t("părului tău")}</span>
           </p>
           <p className="text-lg text-muted-foreground max-w-lg mb-8 leading-relaxed">
-            Hair Theory te ajută să înțelegi nevoile unice ale scalpului și părului tău.
-            Completează chestionarul nostru și primește recomandări personalizate.
+            {t("Hair Theory te ajută să înțelegi nevoile unice ale scalpului și părului tău. Completează chestionarul nostru și primește recomandări personalizate.")}
           </p>
           <motion.a
             href="#questionnaire"
@@ -30,7 +31,7 @@ const Hero = () => {
             whileTap={{ scale: 0.97 }}
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-medium text-lg transition-opacity shadow-lg">
             
-            Începe chestionarul
+            {t("Începe chestionarul")}
           </motion.a>
         </motion.div>
         <motion.div
@@ -42,7 +43,7 @@ const Hero = () => {
           <motion.img
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            alt="Ilustrație botanică Hair Theory"
+            alt={t("Ilustrație botanică Hair Theory")}
             className="w-96 md:w-[34rem] lg:w-[40rem] mix-blend-multiply"
             src="/lovable-uploads/55657a40-5ecd-4b3f-9be3-8172e9d9208a.png"
           />

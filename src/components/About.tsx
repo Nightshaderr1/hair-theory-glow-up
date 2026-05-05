@@ -1,34 +1,34 @@
 import { motion } from "framer-motion";
 import { Leaf, Heart, Sparkles } from "lucide-react";
 import { AboutDecorations } from "./BotanicalDecorations";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const values = [
-  { icon: Leaf, title: "Bazat pe știință", description: "Toate recomandările noastre sunt susținute de cercetări dermatologice și tricologice." },
-  { icon: Heart, title: "Personalizat", description: "Fiecare tip de păr este unic. Oferim sfaturi adaptate nevoilor tale specifice." },
-  { icon: Sparkles, title: "Accesibil", description: "Informații clare, fără jargon, pentru ca toată lumea să poată avea grijă de părul său." },
+const valueDefs = [
+  { icon: Leaf, titleKey: "Bazat pe știință", descKey: "Toate recomandările noastre sunt susținute de cercetări dermatologice și tricologice." },
+  { icon: Heart, titleKey: "Personalizat", descKey: "Fiecare tip de păr este unic. Oferim sfaturi adaptate nevoilor tale specifice." },
+  { icon: Sparkles, titleKey: "Accesibil", descKey: "Informații clare, fără jargon, pentru ca toată lumea să poată avea grijă de părul său." },
 ];
 
 const About = () => {
+  const { t } = useLanguage();
   return (
     <section id="about" className="relative py-24 overflow-hidden">
       <AboutDecorations />
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <span className="inline-block text-sm font-medium tracking-widest uppercase text-accent mb-3">
-            Despre noi
+            {t("Despre noi")}
           </span>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">
-            Misiunea Hair Theory
+            {t("Misiunea Hair Theory")}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            La <span className="font-semibold text-primary">Hair Theory</span>, credem că fiecare persoană merită să
-            înțeleagă și să iubească părul pe care îl are. Misiunea noastră este de a transforma
-            știința tricologică în sfaturi practice, accesibile tuturor — pentru un păr sănătos,
-            frumos și plin de vitalitate.
+            {t("La")} <span className="font-semibold text-primary">Hair Theory</span>,{" "}
+            {t("credem că fiecare persoană merită să înțeleagă și să iubească părul pe care îl are. Misiunea noastră este de a transforma știința tricologică în sfaturi practice, accesibile tuturor — pentru un păr sănătos, frumos și plin de vitalitate.")}
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          {values.map((v, i) => (
+          {valueDefs.map((v, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
@@ -45,10 +45,10 @@ const About = () => {
                 <v.icon size={28} />
               </motion.div>
               <h3 className="font-display font-semibold text-lg text-foreground mb-3">
-                {v.title}
+                {t(v.titleKey)}
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                {v.description}
+                {t(v.descKey)}
               </p>
             </motion.div>
           ))}

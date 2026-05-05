@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { BookOpen, Clock, ExternalLink } from "lucide-react";
 import { BlogDecorations } from "./BotanicalDecorations";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const articles = [
   {
@@ -70,19 +71,20 @@ const articles = [
 ];
 
 const Blog = () => {
+  const { t } = useLanguage();
   return (
     <section id="blog" className="relative py-24 overflow-hidden">
       <BlogDecorations />
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <span className="inline-block text-sm font-medium tracking-widest uppercase text-accent mb-3">
-            Resurse
+            {t("Resurse")}
           </span>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            Blog & Studii
+            {t("Blog & Studii")}
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Articole bazate pe cercetare pentru a-ți înțelege și îngriji mai bine părul.
+            {t("Articole bazate pe cercetare pentru a-ți înțelege și îngriji mai bine părul.")}
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -100,17 +102,17 @@ const Blog = () => {
               <div className="p-6 flex flex-col flex-1">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-xs font-semibold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">
-                    {a.category}
+                    {t(a.category)}
                   </span>
                   <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <Clock size={12} /> {a.readTime}
+                    <Clock size={12} /> {a.readTime.replace("min", t("min"))}
                   </span>
                 </div>
                 <h3 className="font-display font-semibold text-lg text-foreground group-hover:text-primary transition-colors mb-2">
-                  {a.title}
+                  {t(a.title)}
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                  {a.excerpt}
+                  {t(a.excerpt)}
                 </p>
                 <a
                   href={a.url}
@@ -119,7 +121,7 @@ const Blog = () => {
                   className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
                 >
                   <BookOpen size={16} />
-                  Citește mai mult
+                  {t("Citește mai mult")}
                   <ExternalLink size={12} />
                 </a>
               </div>

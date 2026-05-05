@@ -8,8 +8,10 @@ import { QuestionnaireAnswer } from "./questionnaire/types";
 import ExpandableScalpQuestion from "./questionnaire/ExpandableScalpQuestion";
 import TwoStepHairType from "./questionnaire/TwoStepHairType";
 import PorosityQuestion from "./questionnaire/PorosityQuestion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Questionnaire = () => {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<QuestionnaireAnswer[]>(
@@ -75,17 +77,17 @@ const Questionnaire = () => {
 
     if (q.type === "expandable" && a.optionIndex === q.options.length && q.expandableOption) {
       const subLabel = a.expandableSubIndex !== null
-        ? q.expandableOption.subOptions[a.expandableSubIndex].label
+        ? t(q.expandableOption.subOptions[a.expandableSubIndex].label)
         : "";
-      return `${q.expandableOption.label}${subLabel ? ` — ${subLabel}` : ""}`;
+      return `${t(q.expandableOption.label)}${subLabel ? ` — ${subLabel}` : ""}`;
     }
 
     if (q.type === "two-step" && q.subCategories && a.subOptionIndex !== null) {
       const sub = q.subCategories[a.optionIndex]?.[a.subOptionIndex];
-      return `${q.options[a.optionIndex].label} — ${sub?.code} ${sub?.label}`;
+      return `${t(q.options[a.optionIndex].label)} — ${sub?.code} ${t(sub?.label ?? "")}`;
     }
 
-    return q.options[a.optionIndex]?.label ?? "—";
+    return t(q.options[a.optionIndex]?.label ?? "—");
   };
 
   // Detect if any medical condition was selected
@@ -120,16 +122,15 @@ const Questionnaire = () => {
           >
             <CheckCircle2 className="mx-auto mb-6 text-primary" size={64} />
             <h2 className="text-3xl font-display font-bold text-foreground mb-4">
-              Mulțumim!
+              {t("Mulțumim!")}
             </h2>
             <p className="text-muted-foreground text-lg mb-6">
-              Profilul tău a fost salvat. Pe baza răspunsurilor tale, îți vom oferi recomandări
-              personalizate pentru îngrijirea părului.
+              {t("Profilul tău a fost salvat. Pe baza răspunsurilor tale, îți vom oferi recomandări personalizate pentru îngrijirea părului.")}
             </p>
             <div className="bg-muted rounded-xl p-6 text-left space-y-3">
               {questions.map((q, i) => (
                 <div key={i}>
-                  <span className="text-sm font-medium text-foreground">{q.title}</span>
+                  <span className="text-sm font-medium text-foreground">{t(q.title)}</span>
                   <span className="ml-2 text-sm text-primary font-semibold">
                     {getAnswerLabel(i)}
                   </span>
@@ -146,7 +147,7 @@ const Questionnaire = () => {
               }}
               className="mt-8 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
             >
-              Reia chestionarul
+              {t("Reia chestionarul")}
             </motion.button>
           </motion.div>
 
@@ -176,8 +177,8 @@ const Questionnaire = () => {
                       : "border-border bg-card hover:border-primary/40 hover:shadow-sm"
                   }`}
                 >
-                  <span className="text-lg font-semibold text-foreground">{opt.label}</span>
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{opt.description}</p>
+                  <span className="text-lg font-semibold text-foreground">{t(opt.label)}</span>
+                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{t(opt.description)}</p>
                 </motion.button>
               );
             })}
@@ -191,7 +192,7 @@ const Questionnaire = () => {
             >
               <div className="flex items-start gap-3">
                 <span className="text-primary mt-0.5 text-xl shrink-0">❤️</span>
-                <p className="text-sm text-muted-foreground leading-relaxed">{currentQ.infoText}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{t(currentQ.infoText)}</p>
               </div>
             </motion.div>
           )}
@@ -247,8 +248,8 @@ const Questionnaire = () => {
                   : "border-border bg-card hover:border-primary/40 hover:shadow-sm"
               }`}
             >
-              <span className="font-semibold text-foreground">{opt.label}</span>
-              <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{opt.description}</p>
+              <span className="font-semibold text-foreground">{t(opt.label)}</span>
+              <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{t(opt.description)}</p>
             </motion.button>
           );
         })}
@@ -262,10 +263,10 @@ const Questionnaire = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            Chestionarul Hair Theory
+            {t("Chestionarul Hair Theory")}
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Răspunde la {questions.length} întrebări simple pentru a descoperi profilul unic al părului tău.
+            {t("Răspunde la")} {questions.length} {t("întrebări simple pentru a descoperi profilul unic al părului tău.")}
           </p>
         </div>
 
@@ -297,7 +298,7 @@ const Questionnaire = () => {
               transition={{ duration: 0.35 }}
             >
               <h3 className="text-2xl font-display font-semibold text-foreground mb-6">
-                {currentQ.title}
+                {t(currentQ.title)}
               </h3>
               {renderQuestion()}
             </motion.div>
@@ -311,7 +312,7 @@ const Questionnaire = () => {
               disabled={step === 0}
               className="flex items-center gap-1 text-muted-foreground hover:text-foreground disabled:opacity-30 transition-colors"
             >
-              <ChevronLeft size={20} /> Înapoi
+              <ChevronLeft size={20} /> {t("Înapoi")}
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -320,7 +321,7 @@ const Questionnaire = () => {
               disabled={!isCurrentAnswered()}
               className="flex items-center gap-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 disabled:opacity-40 transition-opacity"
             >
-              {step === questions.length - 1 ? "Finalizează" : "Următoarea"}
+              {step === questions.length - 1 ? t("Finalizează") : t("Următoarea")}
               <ChevronRight size={20} />
             </motion.button>
           </div>

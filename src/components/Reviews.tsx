@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ReviewsDecorations } from "./BotanicalDecorations";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Mini logo component used as "star" rating
 const MiniLogo = ({
@@ -54,6 +55,7 @@ interface Review {
 const sampleReviews: Review[] = [];
 
 const Reviews = () => {
+  const { t } = useLanguage();
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
   const [isLoggedIn] = useState(false); // Will be connected to auth later
@@ -76,13 +78,13 @@ const Reviews = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <span className="inline-block text-sm font-medium tracking-widest uppercase text-accent mb-3">
-            Comunitate
+            {t("Comunitate")}
           </span>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            Recenzii
+            {t("Recenzii")}
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Spune-ne ce crezi. Opinia ta este foarte importantă pentru noi!
+            {t("Spune-ne ce crezi. Opinia ta este foarte importantă pentru noi!")}
           </p>
         </div>
 
@@ -92,10 +94,10 @@ const Reviews = () => {
             {!isLoggedIn ? (
               <div className="text-center py-6">
                 <p className="text-muted-foreground mb-4">
-                  Trebuie să fii autentificat pentru a lăsa o recenzie.
+                  {t("Trebuie să fii autentificat pentru a lăsa o recenzie.")}
                 </p>
                 <Button className="rounded-full">
-                  Sign up / Log in
+                  {t("Sign up / Log in")}
                 </Button>
               </div>
             ) : (
@@ -103,7 +105,7 @@ const Reviews = () => {
                 {/* Rating with mini logos */}
                 <div className="flex flex-col items-center gap-3">
                   <span className="text-sm font-medium text-foreground">
-                    Acordă-ne o notă
+                    {t("Acordă-ne o notă")}
                   </span>
                   <div className="flex gap-2">
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -119,7 +121,7 @@ const Reviews = () => {
 
                 {/* Review text */}
                 <Textarea
-                  placeholder="Scrie recenzia ta aici..."
+                  placeholder={t("Scrie recenzia ta aici...")}
                   value={reviewText}
                   onChange={(e) => setReviewText(e.target.value)}
                   className="min-h-[100px] resize-none bg-background"
@@ -131,7 +133,7 @@ const Reviews = () => {
                     disabled={rating === 0 || reviewText.trim().length === 0}
                     className="rounded-full"
                   >
-                    Trimite recenzia
+                    {t("Trimite recenzia")}
                   </Button>
                 </div>
               </div>
@@ -177,7 +179,7 @@ const Reviews = () => {
         ) : (
           <div className="text-center py-8">
             <p className="text-muted-foreground text-sm">
-              Nu există recenzii momentan. Fii primul care lasă o recenzie!
+              {t("Nu există recenzii momentan. Fii primul care lasă o recenzie!")}
             </p>
           </div>
         )}

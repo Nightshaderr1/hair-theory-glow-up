@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Leaf, Star, Crown, Check, Calendar, Video, Utensils, UserCheck, Sparkles, ArrowRight, X, Droplets, Wind, Scissors, Heart, Apple, Moon, ShieldAlert } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface RoutineResultsProps {
   answers: (number | null)[];
@@ -70,12 +71,13 @@ const tiers = [
 ];
 
 const BasicRoutineDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) => {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState(0);
 
   const tabs = [
-    { label: "Produse recomandate", icon: Droplets },
-    { label: "Rutina de aplicare", icon: Wind },
-    { label: "Sfaturi & Nutriție", icon: Heart },
+    { label: t("Produse recomandate"), icon: Droplets },
+    { label: t("Rutina de aplicare"), icon: Wind },
+    { label: t("Sfaturi & Nutriție"), icon: Heart },
   ];
 
   return (
@@ -84,7 +86,7 @@ const BasicRoutineDialog = ({ open, onOpenChange }: { open: boolean; onOpenChang
         <DialogHeader className="p-6 pb-0">
           <DialogTitle className="text-2xl font-display font-bold text-foreground flex items-center gap-2">
             <Leaf className="text-primary" size={28} />
-            Rutina ta Basic — Recomandări AI
+            {t("Rutina ta Basic — Recomandări AI")}
           </DialogTitle>
         </DialogHeader>
 
@@ -113,14 +115,14 @@ const BasicRoutineDialog = ({ open, onOpenChange }: { open: boolean; onOpenChang
         <div className="p-6 min-h-[300px]">
           {activeTab === 0 && (
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-4">Ordinea de aplicare a produselor</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t("Ordinea de aplicare a produselor")}</h3>
               <div className="flex flex-col items-center gap-2">
                 {/* Empty product slots - to be populated later */}
                 {["Pasul 1", "Pasul 2", "Pasul 3", "Pasul 4", "Pasul 5"].map((step, i, arr) => (
                   <div key={i} className="w-full">
                     <div className="border-2 border-dashed border-border rounded-xl p-6 text-center">
-                      <p className="text-muted-foreground font-medium">{step}</p>
-                      <p className="text-xs text-muted-foreground/60 mt-1">Produs recomandat — va fi completat</p>
+                      <p className="text-muted-foreground font-medium">{t(step)}</p>
+                      <p className="text-xs text-muted-foreground/60 mt-1">{t("Produs recomandat — va fi completat")}</p>
                     </div>
                     {i < arr.length - 1 && (
                       <div className="flex justify-center py-1">
@@ -135,7 +137,7 @@ const BasicRoutineDialog = ({ open, onOpenChange }: { open: boolean; onOpenChang
 
           {activeTab === 1 && (
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-4">Cum să aplici fiecare produs</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t("Cum să aplici fiecare produs")}</h3>
               <div className="space-y-4">
                 {["Pasul 1", "Pasul 2", "Pasul 3", "Pasul 4", "Pasul 5"].map((step, i) => (
                   <div key={i} className="border border-border rounded-xl p-5">
@@ -143,10 +145,10 @@ const BasicRoutineDialog = ({ open, onOpenChange }: { open: boolean; onOpenChang
                       <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">
                         {i + 1}
                       </span>
-                      <h4 className="font-semibold text-foreground">{step}</h4>
+                      <h4 className="font-semibold text-foreground">{t(step)}</h4>
                     </div>
                     <p className="text-sm text-muted-foreground ml-11">
-                      Instrucțiuni de aplicare — vor fi completate ulterior.
+                      {t("Instrucțiuni de aplicare — vor fi completate ulterior.")}
                     </p>
                   </div>
                 ))}
@@ -156,7 +158,7 @@ const BasicRoutineDialog = ({ open, onOpenChange }: { open: boolean; onOpenChang
 
           {activeTab === 2 && (
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-4">Sfaturi pentru sănătate și nutriție</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t("Sfaturi pentru sănătate și nutriție")}</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 {[
                   { icon: Apple, title: "Nutriție", placeholder: "Sfaturi alimentare — vor fi completate." },
@@ -169,9 +171,9 @@ const BasicRoutineDialog = ({ open, onOpenChange }: { open: boolean; onOpenChang
                     <div key={i} className="border border-border rounded-xl p-5">
                       <div className="flex items-center gap-2 mb-3">
                         <CardIcon className="text-primary" size={20} />
-                        <h4 className="font-semibold text-foreground">{card.title}</h4>
+                        <h4 className="font-semibold text-foreground">{t(card.title)}</h4>
                       </div>
-                      <p className="text-sm text-muted-foreground">{card.placeholder}</p>
+                      <p className="text-sm text-muted-foreground">{t(card.placeholder)}</p>
                     </div>
                   );
                 })}
@@ -185,16 +187,17 @@ const BasicRoutineDialog = ({ open, onOpenChange }: { open: boolean; onOpenChang
 };
 
 const RoutineResults = ({ answers, questions, hasMedicalCondition = false }: RoutineResultsProps) => {
+  const { t } = useLanguage();
   const [showBasicDialog, setShowBasicDialog] = useState(false);
 
   return (
     <div>
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-          Rutinele tale recomandate
+          {t("Rutinele tale recomandate")}
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Pe baza profilului tău, am creat trei niveluri de rutine personalizate. Alege varianta care ți se potrivește.
+          {t("Pe baza profilului tău, am creat trei niveluri de rutine personalizate. Alege varianta care ți se potrivește.")}
         </p>
       </div>
 
@@ -219,16 +222,16 @@ const RoutineResults = ({ answers, questions, hasMedicalCondition = false }: Rou
                 <div className="absolute inset-0 z-20 bg-card/90 backdrop-blur-sm rounded-2xl flex flex-col items-center justify-center p-8 text-center">
                   <ShieldAlert className="text-destructive mb-4" size={48} />
                   <h4 className="text-lg font-display font-bold text-foreground mb-2">
-                    Recomandări AI indisponibile
+                    {t("Recomandări AI indisponibile")}
                   </h4>
                   <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-                    Din păcate, AI-ul nu are voie să ofere sfaturi medicale. Profilul tău include condiții care necesită consultarea unui expert uman. Te rugăm să alegi una dintre variantele Pro sau Royal pentru recomandări personalizate de la specialiști.
+                    {t("Din păcate, AI-ul nu are voie să ofere sfaturi medicale. Profilul tău include condiții care necesită consultarea unui expert uman. Te rugăm să alegi una dintre variantele Pro sau Royal pentru recomandări personalizate de la specialiști.")}
                   </p>
                 </div>
               )}
               {tier.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
-                  Cel mai popular
+                  {t("Cel mai popular")}
                 </div>
               )}
 
@@ -236,7 +239,7 @@ const RoutineResults = ({ answers, questions, hasMedicalCondition = false }: Rou
                 <Icon className="mx-auto mb-3 text-primary" size={40} />
                 <h3 className="text-2xl font-display font-bold text-foreground">{tier.name}</h3>
                 <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                  {tier.description}
+                  {t(tier.description)}
                 </p>
               </div>
 
@@ -252,13 +255,13 @@ const RoutineResults = ({ answers, questions, hasMedicalCondition = false }: Rou
                     <span className="text-muted-foreground ml-1">€</span>
                     <div className="mt-1">
                       <span className="inline-block bg-secondary text-secondary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                        -50% PROMOȚIE
+                        {t("-50% PROMOȚIE")}
                       </span>
                     </div>
                   </>
                 ) : (
                   <span className="text-4xl font-display font-bold text-foreground">
-                    {tier.price}
+                    {t(tier.price)}
                   </span>
                 )}
               </div>
@@ -267,7 +270,7 @@ const RoutineResults = ({ answers, questions, hasMedicalCondition = false }: Rou
                 {tier.features.map((f, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-foreground">
                     <Check className="text-primary mt-0.5 shrink-0" size={16} />
-                    <span>{f}</span>
+                    <span>{t(f)}</span>
                   </li>
                 ))}
               </ul>
@@ -283,7 +286,7 @@ const RoutineResults = ({ answers, questions, hasMedicalCondition = false }: Rou
                       : "bg-primary text-primary-foreground hover:opacity-90"
                 }`}
               >
-                {tier.buttonLabel}
+                {t(tier.buttonLabel)}
               </button>
             </motion.div>
           );
