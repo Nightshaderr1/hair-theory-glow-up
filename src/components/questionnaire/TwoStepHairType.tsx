@@ -23,9 +23,10 @@ interface Props {
   question: Question;
   answer: QuestionnaireAnswer;
   onSelect: (optIndex: number, subIndex?: number) => void;
+  onSubModeChange?: (inSubMode: boolean, exitSubMode: () => void) => void;
 }
 
-const TwoStepHairType = ({ question, answer, onSelect }: Props) => {
+const TwoStepHairType = ({ question, answer, onSelect, onSubModeChange }: Props) => {
   const { t } = useLanguage();
   const [selectedMain, setSelectedMain] = useState<number | null>(
     answer.optionIndex !== null && answer.subOptionIndex !== null ? answer.optionIndex : null
@@ -45,6 +46,11 @@ const TwoStepHairType = ({ question, answer, onSelect }: Props) => {
   const handleBack = () => {
     setSelectedMain(null);
   };
+
+  // Notify parent when sub-mode changes so parent's back button can hook in
+  React.useEffect(() => {
+    onSubModeChange?.(!!showSub, handleBack);
+  }, [showSub]);
 
   return (
     <div>
