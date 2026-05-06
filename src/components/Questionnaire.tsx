@@ -1,13 +1,14 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ChevronLeft, CheckCircle2 } from "lucide-react";
-import RoutineResults from "./RoutineResults";
+import { ChevronRight, ChevronLeft, CheckCircle2, Send } from "lucide-react";
 import { QuestionnaireDecorations } from "./BotanicalDecorations";
 import { questions } from "./questionnaire/questions-data";
 import { QuestionnaireAnswer } from "./questionnaire/types";
 import ExpandableScalpQuestion from "./questionnaire/ExpandableScalpQuestion";
 import TwoStepHairType from "./questionnaire/TwoStepHairType";
 import PorosityQuestion from "./questionnaire/PorosityQuestion";
+import { getQuestionIcon } from "./questionnaire/QuestionIcons";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Questionnaire = () => {
@@ -18,6 +19,9 @@ const Questionnaire = () => {
     questions.map(() => ({ optionIndex: null, subOptionIndex: null, expandableSubIndex: null }))
   );
   const [submitted, setSubmitted] = useState(false);
+  const [showSubmitDialog, setShowSubmitDialog] = useState(false);
+  const [twoStepInSub, setTwoStepInSub] = useState(false);
+  const exitSubRef = useRef<(() => void) | null>(null);
 
   const currentQ = questions[step];
 
@@ -66,6 +70,11 @@ const Questionnaire = () => {
   };
 
   const goPrev = () => {
+    // If we're inside the two-step sub-selection, exit sub-mode instead of going to previous question
+    if (twoStepInSub && exitSubRef.current) {
+      exitSubRef.current();
+      return;
+    }
     if (step > 0) setStep(step - 1);
     scrollToTop();
   };
@@ -90,25 +99,7 @@ const Questionnaire = () => {
     return t(q.options[a.optionIndex]?.label ?? "—");
   };
 
-  // Detect if any medical condition was selected
-  const hasMedicalCondition = questions.some((q, qIdx) => {
-    const a = answers[qIdx];
-    if (a.optionIndex === null || !q.medicalTrigger) return false;
-    if (q.medicalTrigger === 'expandable') {
-      return a.optionIndex === q.options.length; // expandable option selected
-    }
-    if (Array.isArray(q.medicalTrigger)) {
-      return q.medicalTrigger.includes(a.optionIndex);
-    }
-    return false;
-  });
 
-  // Convert to legacy format for RoutineResults
-  const legacyAnswers = answers.map(a => a.optionIndex);
-  const legacyQuestions = questions.map(q => ({
-    title: q.title,
-    options: q.options.map(o => ({ label: o.label, description: o.description })),
-  }));
 
   if (submitted) {
     return (
@@ -122,10 +113,10 @@ const Questionnaire = () => {
           >
             <CheckCircle2 className="mx-auto mb-6 text-primary" size={64} />
             <h2 className="text-3xl font-display font-bold text-foreground mb-4">
-              {t("Mulțumim!")}
+              {t("Verifică răspunsurile tale")}
             </h2>
             <p className="text-muted-foreground text-lg mb-6">
-              {t("Profilul tău a fost salvat. Pe baza răspunsurilor tale, îți vom oferi recomandări personalizate pentru îngrijirea părului.")}
+              {t("Verifică răspunsurile de mai jos. Când ești gata, trimite-le experților noștri.")}
             </p>
             <div className="bg-muted rounded-xl p-6 text-left space-y-3">
               {questions.map((q, i) => (
@@ -137,22 +128,52 @@ const Questionnaire = () => {
                 </div>
               ))}
             </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                setSubmitted(false);
-                setStep(0);
-                setAnswers(questions.map(() => ({ optionIndex: null, subOptionIndex: null, expandableSubIndex: null })));
-              }}
-              className="mt-8 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
-            >
-              {t("Reia chestionarul")}
-            </motion.button>
-          </motion.div>
 
-          <RoutineResults answers={legacyAnswers} questions={legacyQuestions} hasMedicalCondition={hasMedicalCondition} />
+            <div className="flex flex-col sm:flex-row gap-3 mt-8 justify-center">
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => {
+                  setSubmitted(false);
+                  setStep(0);
+                  setAnswers(questions.map(() => ({ optionIndex: null, subOptionIndex: null, expandableSubIndex: null })));
+                }}
+                className="bg-muted text-foreground border border-border px-6 py-3 rounded-lg font-medium hover:bg-muted/70 transition-colors"
+              >
+                {t("Reia chestionarul")}
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setShowSubmitDialog(true)}
+                className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
+              >
+                <Send size={18} />
+                {t("Trimite răspunsurile")}
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
+
+        <Dialog open={showSubmitDialog} onOpenChange={setShowSubmitDialog}>
+          <DialogContent className="max-w-md text-center">
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-display flex items-center justify-center gap-2">
+                <CheckCircle2 className="text-primary" size={28} />
+                {t("Răspunsuri trimise!")}
+              </DialogTitle>
+              <DialogDescription className="text-base text-muted-foreground pt-3 leading-relaxed">
+                {t("Răspunsurile tale au fost trimise și vor fi analizate de experții noștri în curând. Te vom contacta cu recomandări personalizate.")}
+              </DialogDescription>
+            </DialogHeader>
+            <button
+              onClick={() => setShowSubmitDialog(false)}
+              className="mt-4 w-full bg-primary text-primary-foreground py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
+            >
+              {t("Am înțeles")}
+            </button>
+          </DialogContent>
+        </Dialog>
       </section>
     );
   }
@@ -216,6 +237,10 @@ const Questionnaire = () => {
           question={currentQ}
           answer={answers[step]}
           onSelect={updateAnswer}
+          onSubModeChange={(inSub, exit) => {
+            setTwoStepInSub(inSub);
+            exitSubRef.current = exit;
+          }}
         />
       );
     }
@@ -227,6 +252,41 @@ const Questionnaire = () => {
           answer={answers[step]}
           onSelect={(idx) => updateAnswer(idx)}
         />
+      );
+    }
+
+    if (currentQ.type === "with-icons") {
+      return (
+        <div className="grid gap-4">
+          {currentQ.options.map((opt, i) => {
+            const selected = answers[step].optionIndex === i;
+            const Icon = getQuestionIcon(opt.icon);
+            return (
+              <motion.button
+                key={i}
+                onClick={() => updateAnswer(i)}
+                whileHover={{ scale: 1.02, x: 4 }}
+                whileTap={{ scale: 0.98 }}
+                animate={selected ? { scale: 1.02 } : { scale: 1 }}
+                className={`text-left p-5 rounded-xl border-2 transition-all flex items-center gap-4 ${
+                  selected
+                    ? "border-primary bg-primary/10 shadow-md"
+                    : "border-border bg-card hover:border-primary/40 hover:shadow-sm"
+                }`}
+              >
+                {Icon && (
+                  <div className="shrink-0 w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                )}
+                <div>
+                  <span className="font-semibold text-foreground">{t(opt.label)}</span>
+                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{t(opt.description)}</p>
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
       );
     }
 

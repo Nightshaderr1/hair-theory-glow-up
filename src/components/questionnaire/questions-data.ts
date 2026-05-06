@@ -27,17 +27,7 @@ export const questions: Question[] = [
       { label: "Peste 65 ani", description: "Părul necesită cea mai delicată îngrijire, cu produse nutritive și regenerante adaptate vârstei." },
     ],
   },
-  {
-    title: "Care este rasa/etnia ta?",
-    options: [
-      { label: "Alb", description: "Persoanele de origine europeană au de obicei păr cu textură fină până la medie, cu porozitate variabilă și densitate moderată." },
-      { label: "Negru sau afro-american", description: "Părul afro-texturat tinde să fie creț sau foarte creț, cu porozitate ridicată și nevoie intensă de hidratare și protecție." },
-      { label: "Asiatic", description: "Părul asiatic este de obicei drept, gros și cu porozitate scăzută. Firul este rezistent, dar poate fi dificil de stilizat." },
-      { label: "Caucazian", description: "Părul caucazian variază de la drept la ondulat, cu textură fină până la medie și densitate moderată." },
-      { label: "Hispanic", description: "Părul hispanic variază semnificativ, de la drept la foarte creț, cu textură medie spre groasă și tendință naturală spre volum." },
-      { label: "Altele", description: "Dacă etnia ta nu se regăsește în opțiunile de mai sus, selectează această variantă. Vom adapta recomandările pe baza celorlalte răspunsuri." },
-    ],
-  },
+  // (Race/ethnicity question removed)
 
   // === HAIR & SCALP QUESTIONS ===
   {
@@ -74,30 +64,14 @@ export const questions: Question[] = [
   },
   {
     title: "Ce textură a părului aveți?",
+    type: "with-icons",
     options: [
-      { label: "Fin", description: "Firul de păr are un diametru mic. Se simte moale la atingere, dar se poate lipici ușor și îi lipsește volumul." },
-      { label: "Mediu", description: "Firul are un diametru standard. Este ușor de stilizat, rezistent și oferă un echilibru bun între volum și manevrabilitate." },
-      { label: "Gros", description: "Firul de păr are un diametru mare. Este puternic și rezistent, dar poate fi mai greu de gestionat și predispus la frizz." },
+      { label: "Fin", description: "Firul de păr are un diametru mic. Se simte moale la atingere, dar se poate lipici ușor și îi lipsește volumul.", icon: "texture-fine" },
+      { label: "Mediu", description: "Firul are un diametru standard. Este ușor de stilizat, rezistent și oferă un echilibru bun între volum și manevrabilitate.", icon: "texture-medium" },
+      { label: "Gros", description: "Firul de păr are un diametru mare. Este puternic și rezistent, dar poate fi mai greu de gestionat și predispus la frizz.", icon: "texture-thick" },
     ],
   },
-  {
-    title: "Ce porozitate a părului aveți?",
-    type: "with-test",
-    options: [
-      { label: "Scăzută", description: "Părul se udă greu, apa tinde să rămână sub formă de bobițe la suprafață, iar uscarea naturală durează foarte mult (peste 4-6 ore). Produsele sunt absorbite greu." },
-      { label: "Medie", description: "Părul absoarbe și reține umiditatea în mod echilibrat. Se udă ușor sub duș și se usucă într-un timp rezonabil." },
-      { label: "Ridicată", description: "Părul absoarbe apa instantaneu ca un burete, dar se și usucă foarte repede (adesea sub o oră). Pare mereu însetat de hidratare." },
-    ],
-    testModal: {
-      buttonLabel: "Nu sunt sigur(ă), cum verific?",
-      title: "Verifică textura firului de păr",
-      instructions: "Ia un singur fir de păr între degetul mare și arătător. Glisează degetele de-a lungul firului, începând de la vârf spre rădăcină (în sens invers creșterii).",
-      results: [
-        { condition: "Dacă degetele alunecă fin și firul se simte perfect neted", result: "Ai Porozitate Scăzută." },
-        { condition: "Dacă simți mici denivelări, asperități sau firul se simte aspru ca nisipul", result: "Ai Porozitate Ridicată." },
-      ],
-    },
-  },
+  // (Porosity question removed)
   {
     title: "Cât de lung este părul tău?",
     options: [
@@ -140,12 +114,13 @@ export const questions: Question[] = [
   },
   {
     title: "Cum îți porți părul cel mai des?",
+    type: "with-icons",
     options: [
-      { label: "Liber / Desfăcut", description: "Părul este lăsat să cadă natural, fără accesorii sau coafuri strânse. Permite aerisirea scalpului, dar poate fi expus la factori externi." },
-      { label: "Legat strâns (coadă, coc)", description: "Părul este prins strâns în coadă de cal, coc sau alte coafuri fixe. Tensiunea constantă poate afecta linia părului și foliculii." },
-      { label: "Legat lejer (coadă moale, împletituri)", description: "Părul este prins ușor, fără tensiune excesivă. O variantă mai blândă care protejează firul de păr." },
-      { label: "Cu accesorii (căciulă, șapcă, batic)", description: "Părul este acoperit frecvent. Fricțiunea cu materialele textile poate cauza frizz, electricitate statică sau ruperea firului." },
-      { label: "Stilizat cu căldură (placă, ondulator)", description: "Folosești regulat instrumente termice pentru stilizare. Căldura repetată poate deteriora cuticulele și deshidrata firul de păr." },
+      { label: "Liber / Desfăcut", description: "Părul este lăsat să cadă natural, fără accesorii sau coafuri strânse. Permite aerisirea scalpului, dar poate fi expus la factori externi.", icon: "hairstyle-loose" },
+      { label: "Legat strâns (coadă, coc)", description: "Părul este prins strâns în coadă de cal, coc sau alte coafuri fixe. Tensiunea constantă poate afecta linia părului și foliculii.", icon: "hairstyle-tight" },
+      { label: "Legat lejer (coadă moale, împletituri)", description: "Părul este prins ușor, fără tensiune excesivă. O variantă mai blândă care protejează firul de păr.", icon: "hairstyle-braid" },
+      { label: "Cu accesorii (căciulă, șapcă, batic)", description: "Părul este acoperit frecvent. Fricțiunea cu materialele textile poate cauza frizz, electricitate statică sau ruperea firului.", icon: "hairstyle-hat" },
+      { label: "Stilizat cu căldură (placă, ondulator)", description: "Folosești regulat instrumente termice pentru stilizare. Căldura repetată poate deteriora cuticulele și deshidrata firul de păr.", icon: "hairstyle-heat" },
     ],
   },
 
@@ -154,6 +129,7 @@ export const questions: Question[] = [
     title: "Ce tip de scalp aveți?",
     type: "expandable",
     options: [
+      { label: "Scalp normal", description: "Scalpul tău este echilibrat: nu este nici uscat, nici gras. Producția de sebum este moderată și nu prezintă iritații sau disconfort." },
       { label: "Scalp uscat", description: "Simți des senzație de strângere, mâncărime sau observi fulgi mici? Scalpul tău produce puțin sebum, ceea ce duce la uscăciune." },
       { label: "Scalp cu tendință de îngrășare", description: "Părul tău devine gras la rădăcini la scurt timp după spălare? Scalpul produce sebum în exces, dând un aspect lucios și lipicios." },
       { label: "Scalp mixt", description: "Ai zone grase la rădăcini dar vârfuri uscate? Scalpul mixt combină caracteristici ale celor două tipuri." },

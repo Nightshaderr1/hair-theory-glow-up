@@ -10,8 +10,8 @@ export interface SubOption {
 
 export interface Question {
   title: string;
-  type?: 'default' | 'expandable' | 'two-step' | 'with-test' | 'info-card';
-  options: Option[];
+  type?: 'default' | 'expandable' | 'two-step' | 'with-test' | 'info-card' | 'with-icons';
+  options: (Option & { icon?: string })[];
   infoText?: string;
   expandableOption?: {
     label: string;
