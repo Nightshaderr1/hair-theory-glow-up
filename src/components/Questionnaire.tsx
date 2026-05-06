@@ -237,6 +237,10 @@ const Questionnaire = () => {
           question={currentQ}
           answer={answers[step]}
           onSelect={updateAnswer}
+          onSubModeChange={(inSub, exit) => {
+            setTwoStepInSub(inSub);
+            exitSubRef.current = exit;
+          }}
         />
       );
     }
@@ -248,6 +252,41 @@ const Questionnaire = () => {
           answer={answers[step]}
           onSelect={(idx) => updateAnswer(idx)}
         />
+      );
+    }
+
+    if (currentQ.type === "with-icons") {
+      return (
+        <div className="grid gap-4">
+          {currentQ.options.map((opt, i) => {
+            const selected = answers[step].optionIndex === i;
+            const Icon = getQuestionIcon(opt.icon);
+            return (
+              <motion.button
+                key={i}
+                onClick={() => updateAnswer(i)}
+                whileHover={{ scale: 1.02, x: 4 }}
+                whileTap={{ scale: 0.98 }}
+                animate={selected ? { scale: 1.02 } : { scale: 1 }}
+                className={`text-left p-5 rounded-xl border-2 transition-all flex items-center gap-4 ${
+                  selected
+                    ? "border-primary bg-primary/10 shadow-md"
+                    : "border-border bg-card hover:border-primary/40 hover:shadow-sm"
+                }`}
+              >
+                {Icon && (
+                  <div className="shrink-0 w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                )}
+                <div>
+                  <span className="font-semibold text-foreground">{t(opt.label)}</span>
+                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{t(opt.description)}</p>
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
       );
     }
 
