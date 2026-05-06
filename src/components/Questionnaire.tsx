@@ -1,13 +1,14 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ChevronLeft, CheckCircle2 } from "lucide-react";
-import RoutineResults from "./RoutineResults";
+import { ChevronRight, ChevronLeft, CheckCircle2, Send } from "lucide-react";
 import { QuestionnaireDecorations } from "./BotanicalDecorations";
 import { questions } from "./questionnaire/questions-data";
 import { QuestionnaireAnswer } from "./questionnaire/types";
 import ExpandableScalpQuestion from "./questionnaire/ExpandableScalpQuestion";
 import TwoStepHairType from "./questionnaire/TwoStepHairType";
 import PorosityQuestion from "./questionnaire/PorosityQuestion";
+import { getQuestionIcon } from "./questionnaire/QuestionIcons";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Questionnaire = () => {
