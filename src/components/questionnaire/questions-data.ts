@@ -129,6 +129,7 @@ export const questions: Question[] = [
     title: "Ce tip de scalp aveți?",
     type: "expandable",
     options: [
+      { label: "Scalp normal", description: "Scalpul tău este echilibrat: nu este nici uscat, nici gras. Producția de sebum este moderată și nu prezintă iritații sau disconfort." },
       { label: "Scalp uscat", description: "Simți des senzație de strângere, mâncărime sau observi fulgi mici? Scalpul tău produce puțin sebum, ceea ce duce la uscăciune." },
       { label: "Scalp cu tendință de îngrășare", description: "Părul tău devine gras la rădăcini la scurt timp după spălare? Scalpul produce sebum în exces, dând un aspect lucios și lipicios." },
       { label: "Scalp mixt", description: "Ai zone grase la rădăcini dar vârfuri uscate? Scalpul mixt combină caracteristici ale celor două tipuri." },
