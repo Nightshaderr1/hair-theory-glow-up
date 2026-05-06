@@ -107,13 +107,6 @@ const Questionnaire = () => {
     return false;
   });
 
-  // Convert to legacy format for RoutineResults
-  const legacyAnswers = answers.map(a => a.optionIndex);
-  const legacyQuestions = questions.map(q => ({
-    title: q.title,
-    options: q.options.map(o => ({ label: o.label, description: o.description })),
-  }));
-
   if (submitted) {
     return (
       <section id="questionnaire" className="relative py-24 bg-sage/20 overflow-hidden">
@@ -126,10 +119,10 @@ const Questionnaire = () => {
           >
             <CheckCircle2 className="mx-auto mb-6 text-primary" size={64} />
             <h2 className="text-3xl font-display font-bold text-foreground mb-4">
-              {t("Mulțumim!")}
+              {t("Verifică răspunsurile tale")}
             </h2>
             <p className="text-muted-foreground text-lg mb-6">
-              {t("Profilul tău a fost salvat. Pe baza răspunsurilor tale, îți vom oferi recomandări personalizate pentru îngrijirea părului.")}
+              {t("Verifică răspunsurile de mai jos. Când ești gata, trimite-le experților noștri.")}
             </p>
             <div className="bg-muted rounded-xl p-6 text-left space-y-3">
               {questions.map((q, i) => (
@@ -141,22 +134,52 @@ const Questionnaire = () => {
                 </div>
               ))}
             </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                setSubmitted(false);
-                setStep(0);
-                setAnswers(questions.map(() => ({ optionIndex: null, subOptionIndex: null, expandableSubIndex: null })));
-              }}
-              className="mt-8 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
-            >
-              {t("Reia chestionarul")}
-            </motion.button>
-          </motion.div>
 
-          <RoutineResults answers={legacyAnswers} questions={legacyQuestions} hasMedicalCondition={hasMedicalCondition} />
+            <div className="flex flex-col sm:flex-row gap-3 mt-8 justify-center">
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => {
+                  setSubmitted(false);
+                  setStep(0);
+                  setAnswers(questions.map(() => ({ optionIndex: null, subOptionIndex: null, expandableSubIndex: null })));
+                }}
+                className="bg-muted text-foreground border border-border px-6 py-3 rounded-lg font-medium hover:bg-muted/70 transition-colors"
+              >
+                {t("Reia chestionarul")}
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setShowSubmitDialog(true)}
+                className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
+              >
+                <Send size={18} />
+                {t("Trimite răspunsurile")}
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
+
+        <Dialog open={showSubmitDialog} onOpenChange={setShowSubmitDialog}>
+          <DialogContent className="max-w-md text-center">
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-display flex items-center justify-center gap-2">
+                <CheckCircle2 className="text-primary" size={28} />
+                {t("Răspunsuri trimise!")}
+              </DialogTitle>
+              <DialogDescription className="text-base text-muted-foreground pt-3 leading-relaxed">
+                {t("Răspunsurile tale au fost trimise și vor fi analizate de experții noștri în curând. Te vom contacta cu recomandări personalizate.")}
+              </DialogDescription>
+            </DialogHeader>
+            <button
+              onClick={() => setShowSubmitDialog(false)}
+              className="mt-4 w-full bg-primary text-primary-foreground py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
+            >
+              {t("Am înțeles")}
+            </button>
+          </DialogContent>
+        </Dialog>
       </section>
     );
   }
