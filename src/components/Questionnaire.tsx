@@ -19,6 +19,9 @@ const Questionnaire = () => {
     questions.map(() => ({ optionIndex: null, subOptionIndex: null, expandableSubIndex: null }))
   );
   const [submitted, setSubmitted] = useState(false);
+  const [showSubmitDialog, setShowSubmitDialog] = useState(false);
+  const [twoStepInSub, setTwoStepInSub] = useState(false);
+  const exitSubRef = useRef<(() => void) | null>(null);
 
   const currentQ = questions[step];
 
