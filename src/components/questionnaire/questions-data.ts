@@ -64,30 +64,14 @@ export const questions: Question[] = [
   },
   {
     title: "Ce textură a părului aveți?",
+    type: "with-icons",
     options: [
-      { label: "Fin", description: "Firul de păr are un diametru mic. Se simte moale la atingere, dar se poate lipici ușor și îi lipsește volumul." },
-      { label: "Mediu", description: "Firul are un diametru standard. Este ușor de stilizat, rezistent și oferă un echilibru bun între volum și manevrabilitate." },
-      { label: "Gros", description: "Firul de păr are un diametru mare. Este puternic și rezistent, dar poate fi mai greu de gestionat și predispus la frizz." },
+      { label: "Fin", description: "Firul de păr are un diametru mic. Se simte moale la atingere, dar se poate lipici ușor și îi lipsește volumul.", icon: "texture-fine" },
+      { label: "Mediu", description: "Firul are un diametru standard. Este ușor de stilizat, rezistent și oferă un echilibru bun între volum și manevrabilitate.", icon: "texture-medium" },
+      { label: "Gros", description: "Firul de păr are un diametru mare. Este puternic și rezistent, dar poate fi mai greu de gestionat și predispus la frizz.", icon: "texture-thick" },
     ],
   },
-  {
-    title: "Ce porozitate a părului aveți?",
-    type: "with-test",
-    options: [
-      { label: "Scăzută", description: "Părul se udă greu, apa tinde să rămână sub formă de bobițe la suprafață, iar uscarea naturală durează foarte mult (peste 4-6 ore). Produsele sunt absorbite greu." },
-      { label: "Medie", description: "Părul absoarbe și reține umiditatea în mod echilibrat. Se udă ușor sub duș și se usucă într-un timp rezonabil." },
-      { label: "Ridicată", description: "Părul absoarbe apa instantaneu ca un burete, dar se și usucă foarte repede (adesea sub o oră). Pare mereu însetat de hidratare." },
-    ],
-    testModal: {
-      buttonLabel: "Nu sunt sigur(ă), cum verific?",
-      title: "Verifică textura firului de păr",
-      instructions: "Ia un singur fir de păr între degetul mare și arătător. Glisează degetele de-a lungul firului, începând de la vârf spre rădăcină (în sens invers creșterii).",
-      results: [
-        { condition: "Dacă degetele alunecă fin și firul se simte perfect neted", result: "Ai Porozitate Scăzută." },
-        { condition: "Dacă simți mici denivelări, asperități sau firul se simte aspru ca nisipul", result: "Ai Porozitate Ridicată." },
-      ],
-    },
-  },
+  // (Porosity question removed)
   {
     title: "Cât de lung este părul tău?",
     options: [
