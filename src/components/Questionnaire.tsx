@@ -70,6 +70,11 @@ const Questionnaire = () => {
   };
 
   const goPrev = () => {
+    // If we're inside the two-step sub-selection, exit sub-mode instead of going to previous question
+    if (twoStepInSub && exitSubRef.current) {
+      exitSubRef.current();
+      return;
+    }
     if (step > 0) setStep(step - 1);
     scrollToTop();
   };
