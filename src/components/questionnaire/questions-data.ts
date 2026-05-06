@@ -114,12 +114,13 @@ export const questions: Question[] = [
   },
   {
     title: "Cum îți porți părul cel mai des?",
+    type: "with-icons",
     options: [
-      { label: "Liber / Desfăcut", description: "Părul este lăsat să cadă natural, fără accesorii sau coafuri strânse. Permite aerisirea scalpului, dar poate fi expus la factori externi." },
-      { label: "Legat strâns (coadă, coc)", description: "Părul este prins strâns în coadă de cal, coc sau alte coafuri fixe. Tensiunea constantă poate afecta linia părului și foliculii." },
-      { label: "Legat lejer (coadă moale, împletituri)", description: "Părul este prins ușor, fără tensiune excesivă. O variantă mai blândă care protejează firul de păr." },
-      { label: "Cu accesorii (căciulă, șapcă, batic)", description: "Părul este acoperit frecvent. Fricțiunea cu materialele textile poate cauza frizz, electricitate statică sau ruperea firului." },
-      { label: "Stilizat cu căldură (placă, ondulator)", description: "Folosești regulat instrumente termice pentru stilizare. Căldura repetată poate deteriora cuticulele și deshidrata firul de păr." },
+      { label: "Liber / Desfăcut", description: "Părul este lăsat să cadă natural, fără accesorii sau coafuri strânse. Permite aerisirea scalpului, dar poate fi expus la factori externi.", icon: "hairstyle-loose" },
+      { label: "Legat strâns (coadă, coc)", description: "Părul este prins strâns în coadă de cal, coc sau alte coafuri fixe. Tensiunea constantă poate afecta linia părului și foliculii.", icon: "hairstyle-tight" },
+      { label: "Legat lejer (coadă moale, împletituri)", description: "Părul este prins ușor, fără tensiune excesivă. O variantă mai blândă care protejează firul de păr.", icon: "hairstyle-braid" },
+      { label: "Cu accesorii (căciulă, șapcă, batic)", description: "Părul este acoperit frecvent. Fricțiunea cu materialele textile poate cauza frizz, electricitate statică sau ruperea firului.", icon: "hairstyle-hat" },
+      { label: "Stilizat cu căldură (placă, ondulator)", description: "Folosești regulat instrumente termice pentru stilizare. Căldura repetată poate deteriora cuticulele și deshidrata firul de păr.", icon: "hairstyle-heat" },
     ],
   },
 
