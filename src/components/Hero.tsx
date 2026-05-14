@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { HeroDecorations } from "./BotanicalDecorations";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -25,14 +26,16 @@ const Hero = () => {
           <p className="text-lg text-muted-foreground max-w-lg mb-8 leading-relaxed">
             {t("Hair Theory te ajută să înțelegi nevoile unice ale scalpului și părului tău. Completează chestionarul nostru și primește recomandări personalizate.")}
           </p>
-          <motion.a
-            href="#questionnaire"
+          <motion.div
             whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px hsl(152 28% 38% / 0.4)" }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-medium text-lg transition-opacity shadow-lg">
-            
-            {t("Începe chestionarul")}
-          </motion.a>
+            className="inline-block rounded-lg shadow-lg">
+            <Link
+              to="/teams"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-medium text-lg">
+              {t("Începe chestionarul")}
+            </Link>
+          </motion.div>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}

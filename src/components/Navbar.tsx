@@ -9,7 +9,6 @@ const Navbar = () => {
 
   const navLinks = [
     { label: t("Acasă"), href: "#hero" },
-    { label: t("Chestionar"), href: "#questionnaire" },
     { label: t("Blog"), href: "#blog" },
     { label: t("Recenzii"), href: "#reviews" },
     { label: t("Despre noi"), href: "#about" },
