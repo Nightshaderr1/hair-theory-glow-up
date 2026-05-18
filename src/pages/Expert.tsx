@@ -118,6 +118,7 @@ const Expert = () => {
 
             {/* CTA */}
             <motion.button
+              onClick={() => id === "curly" && navigate("/teams/curly/questionnaire")}
               whileHover={{ scale: 1.04, boxShadow: "0 15px 40px -10px hsl(var(--primary) / 0.4)" }}
               whileTap={{ scale: 0.97 }}
               className="mt-8 inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-medium text-lg shadow-lg"
