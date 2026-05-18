@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link, useParams, Navigate } from "react-router-dom";
+import { Link, useParams, Navigate, useNavigate } from "react-router-dom";
 import { ArrowLeft, Instagram, Facebook, Youtube, Globe } from "lucide-react";
 import avatarCurly from "@/assets/avatar-curly.png";
 import avatarStraight from "@/assets/avatar-straight.png";
