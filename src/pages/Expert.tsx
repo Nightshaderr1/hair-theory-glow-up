@@ -33,6 +33,7 @@ const socials = [
 
 const Expert = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { t } = useLanguage();
 
   if (!id || !(id in experts)) {
