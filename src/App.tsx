@@ -23,6 +23,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/teams" element={<Teams />} />
             <Route path="/teams/:id" element={<Expert />} />
+            <Route path="/teams/curly/questionnaire" element={<CurlyQuestionnaire />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
