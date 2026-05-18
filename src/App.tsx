@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Teams from "./pages/Teams";
 import Expert from "./pages/Expert";
+import CurlyQuestionnaire from "./pages/CurlyQuestionnaire";
 import NotFound from "./pages/NotFound";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
