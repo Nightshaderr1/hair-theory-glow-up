@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link, useParams, Navigate } from "react-router-dom";
+import { Link, useParams, Navigate, useNavigate } from "react-router-dom";
 import { ArrowLeft, Instagram, Facebook, Youtube, Globe } from "lucide-react";
 import avatarCurly from "@/assets/avatar-curly.png";
 import avatarStraight from "@/assets/avatar-straight.png";
@@ -33,6 +33,7 @@ const socials = [
 
 const Expert = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { t } = useLanguage();
 
   if (!id || !(id in experts)) {
@@ -117,6 +118,7 @@ const Expert = () => {
 
             {/* CTA */}
             <motion.button
+              onClick={() => id === "curly" && navigate("/teams/curly/questionnaire")}
               whileHover={{ scale: 1.04, boxShadow: "0 15px 40px -10px hsl(var(--primary) / 0.4)" }}
               whileTap={{ scale: 0.97 }}
               className="mt-8 inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-medium text-lg shadow-lg"

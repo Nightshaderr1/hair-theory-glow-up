@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Teams from "./pages/Teams";
 import Expert from "./pages/Expert";
+import CurlyQuestionnaire from "./pages/CurlyQuestionnaire";
 import NotFound from "./pages/NotFound";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
@@ -22,6 +23,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/teams" element={<Teams />} />
             <Route path="/teams/:id" element={<Expert />} />
+            <Route path="/teams/curly/questionnaire" element={<CurlyQuestionnaire />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
